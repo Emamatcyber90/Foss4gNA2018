@@ -1,0 +1,30 @@
+{
+  "name": "map-carousel",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@boundlessgeo/sdk": "^2.3.12",
+    "node-sass-chokidar": "^1.2.2",
+    "ol": "^4.6.5",
+    "ol-mapbox-style": "^2.11.2",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
+    "react-slick": "^0.23.1",
+    "redux": "^4.0.0",
+    "slick-carousel": "^1.8.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build-css": "node-sass-chokidar src/ --include-path node_modules/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ --include-path node_modules/ -o src/ --watch --recursive",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint-config-openlayers": "^9.2.0",
+    "eslint-plugin-promise": "^3.7.0"
+  }
+}
