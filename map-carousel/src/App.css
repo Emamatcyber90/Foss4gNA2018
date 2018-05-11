@@ -244,5 +244,6 @@ li.sdk-layer {
 
 .Map-container .landing {
   background: url(img/page-one.png) no-repeat center center;
+  background-size: cover;
   color: #fff;
   height: 100vh; }
