@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "eslint-config-openlayers": "^9.2.0",
-    "eslint-plugin-promise": "^3.7.0"
+    "eslint-plugin-promise": "^3.7.0",
+    "sanitize.css": "^5.0.0"
   }
 }

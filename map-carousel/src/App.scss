@@ -1,6 +1,7 @@
 @import "@boundlessgeo/sdk/stylesheet/sdk.scss";
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+// @import "/node_modules/sanitize.css/sanitize.css";
 
 .App {
   text-align: center;
@@ -16,11 +17,21 @@
 }
 
 .Map-container {
+  .slideContent {
+    height: 100vh;
+    background-color: brown;
+  }
   .landing {
     background: url(img/page-one.png) no-repeat center center;
     background-size: cover;
     color: #fff;
     height: 100vh;
+    h1{
+      margin: 0;
+      padding-top: 360px;
+      font-size: 60px;
+    }
+
   }
 
 }

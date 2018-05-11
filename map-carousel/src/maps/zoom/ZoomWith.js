@@ -24,7 +24,7 @@ export default class ZoomWith extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="slideContent">
         <content>
           <div className="left skinny">random-ness</div>
           <div className="right fat">
