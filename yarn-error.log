@@ -1,0 +1,32 @@
+Arguments: 
+  /Users/jeremy/.nvm/versions/node/v8.9.4/bin/node /Users/jeremy/.yarn/bin/yarn.js start
+
+PATH: 
+  /opt/local/bin:/opt/local/sbin:/Users/jeremy/.yarn/bin:/Users/jeremy/.config/yarn/global/node_modules/.bin:/Users/jeremy/.jenv/shims:/Users/jeremy/.jenv/bin:/Users/jeremy/.nvm/versions/node/v8.9.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/jeremy/.nexustools:/Users/jeremy/geogig/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.9.4
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Couldn't find a package.json file in "/Users/jeremy/git/boundless/Foss4gNA2018"
+      at new MessageError (/Users/jeremy/.yarn/lib/cli.js:186:110)
+      at /Users/jeremy/.yarn/lib/cli.js:40048:15
+      at Generator.next (<anonymous>)
+      at step (/Users/jeremy/.yarn/lib/cli.js:98:30)
+      at /Users/jeremy/.yarn/lib/cli.js:109:13
+      at <anonymous>
