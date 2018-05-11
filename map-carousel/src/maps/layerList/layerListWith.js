@@ -126,6 +126,8 @@ export default class MAP extends Component {
       source: 'states',
       type: 'raster',
     }));
+    this.addRandomPoints(200);
+
   }
 
   // Add a random point to the map
@@ -150,13 +152,29 @@ export default class MAP extends Component {
   }
 
   render() {
-    this.addRandomPoints(200);
     return (
-      <Provider store={store}>
-        <SdkMap>
-          <SdkLayerList layerClass={LayerListItem} />
-        </SdkMap>
-      </Provider>
+      <div>
+        <content>
+          <div className="left skinny">random-ness</div>
+          <div className="right fat">
+            <h3>title</h3>
+            <Provider store={store}>
+              <SdkLayerList layerClass={LayerListItem} />
+            </Provider>
+            <map>
+              <Provider store={store}>
+                <SdkMap store={store} />
+              </Provider>
+            </map>
+            <div className="caption">
+              caption here
+            </div>
+          </div>
+        </content>
+        <footer>
+          FOOTER HERE
+        </footer>
+      </div>
     );
   }
 }
