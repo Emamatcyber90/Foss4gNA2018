@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {createStore, combineReducers} from 'redux';
 import Slider from 'react-slick';
@@ -9,7 +8,6 @@ import ZoomWith from './maps/zoom/ZoomWith';
 import LayerListWith from './maps/layerList/layerListWith';
 // import LayerListWithout from './maps/layerList/layerListWithout';
 
-import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import Title from './title.js';
