@@ -21,7 +21,8 @@
     "build-css": "node-sass-chokidar src/ --include-path node_modules/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ --include-path node_modules/ -o src/ --watch --recursive",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "watch": "NODE_ENV=production webpack --watch --config ./config/webpack.config.dev.js"
   },
   "devDependencies": {
     "eslint-config-openlayers": "^9.2.0",

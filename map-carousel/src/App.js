@@ -8,6 +8,7 @@ import ZoomWith from './maps/zoom/ZoomWith';
 import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
+import Title from './title.js';
 
 const store = createStore(combineReducers({
   'map': SdkMapReducer,
@@ -40,6 +41,9 @@ class App extends Component {
         </p>
         <div className="Map-container">
           <Slider {...settings}>
+            <div>
+              <Title/>
+            </div>
             <div>
               <SdkMap store={store} />
             </div>

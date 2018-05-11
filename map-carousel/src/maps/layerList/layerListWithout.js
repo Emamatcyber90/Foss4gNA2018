@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {createStore, combineReducers} from 'redux';
-
 import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
@@ -10,7 +9,7 @@ const store = createStore(combineReducers({
   'map': SdkMapReducer,
 }));
 
-export default class ZoomWithout extends Component {
+export default class MAP extends Component {
   componentDidMount() {
   // add the OSM source
     store.dispatch(SdkMapActions.addOsmSource('osm'));

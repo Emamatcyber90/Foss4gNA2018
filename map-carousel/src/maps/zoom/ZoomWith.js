@@ -11,7 +11,7 @@ const store = createStore(combineReducers({
   'map': SdkMapReducer,
 }));
 
-export default class MapTwo extends Component {
+export default class ZoomWith extends Component {
   componentDidMount() {
   // add the OSM source
     store.dispatch(SdkMapActions.addOsmSource('osm'));
