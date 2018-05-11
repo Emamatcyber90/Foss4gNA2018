@@ -66,9 +66,6 @@ class App extends Component {
             <div>
               <LayerListWith/>
             </div>
-            <div>
-
-            </div>
           </Slider>
         </div>
       </div>

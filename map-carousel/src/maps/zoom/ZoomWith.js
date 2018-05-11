@@ -24,11 +24,27 @@ export default class ZoomWith extends Component {
   }
   render() {
     return (
-      <Provider store={store}>
-        <SdkMap store={store} >
-          <SdkZoomControl />
-        </SdkMap>
-      </Provider>
+      <div>
+        <content>
+          <div className="left skinny">random-ness</div>
+          <div className="right fat">
+            <h3>title</h3>
+            <map>
+              <Provider store={store}>
+                <SdkMap store={store} >
+                  <SdkZoomControl />
+                </SdkMap>
+              </Provider>
+            </map>
+            <div className="caption">
+              caption here
+            </div>
+          </div>
+        </content>
+        <footer>
+          FOOTER HERE
+        </footer>
+      </div>
     );
   }
 }
