@@ -242,9 +242,7 @@ li.sdk-layer {
   to {
     transform: rotate(360deg); } }
 
-.Map-container {
-  height: 100vh;
-  width: 100vw; }
-  .Map-container .landing {
-    background: url(img/page-one.png) no-repeat center center fixed;
-    color: #fff; }
+.Map-container .landing {
+  background: url(img/page-one.png) no-repeat center center;
+  color: #fff;
+  height: 100vh; }
