@@ -11,7 +11,7 @@ import {types, layerListItemSource, layerListItemTarget, collect, collectDrop} f
 
 const store = createStore(combineReducers({
   'map': SdkMapReducer,
-}));
+}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 class LayerListItem extends SdkLayerListItem {
   render() {
@@ -91,21 +91,6 @@ export default class MAP extends Component {
         'bnd:hide-layerlist': true,
       },
     }));
-    // 'geojson' sources allow rendering a vector layer
-    // with all the features stored as GeoJSON. "data" can
-    // be an individual Feature or a FeatureCollection.
-    store.dispatch(SdkMapActions.addSource('dynamic-source', {type: 'geojson'}));
-
-    store.dispatch(SdkMapActions.addLayer({
-      id: 'dynamic-layer',
-      type: 'circle',
-      source: 'dynamic-source',
-      paint: {
-        'circle-radius': 5,
-        'circle-color': '#552211',
-        'circle-stroke-color': '#00ff11',
-      },
-    }));
     store.dispatch(SdkMapActions.addSource('points', {
       type: 'geojson',
       clusterRadius: 50,
@@ -125,6 +110,17 @@ export default class MAP extends Component {
       id: 'states',
       source: 'states',
       type: 'raster',
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'random-points',
+      source: 'points',
+      type: 'circle',
+      paint: {
+        'circle-radius': 3,
+        'circle-color': '#756bb1',
+        'circle-stroke-color': '#756bb1',
+      },
+      filter: ['!has', 'point_count'],
     }));
     this.addRandomPoints(200);
 
