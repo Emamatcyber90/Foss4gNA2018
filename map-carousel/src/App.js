@@ -9,7 +9,6 @@ import LayerListWithout from './maps/layerList/layerListWithout';
 import BigIcon from './maps/featureStyle/bigIcons';
 import SmallIcon from './maps/featureStyle/smallerIcons';
 import PolygonSolid from './maps/featureStyle/polygonSolid';
-import PolygonOpac from './maps/featureStyle/polygonOpac';
 
 import Title from './title.js';
 
@@ -58,9 +57,6 @@ class App extends Component {
             </div>
             <div>
               <PolygonSolid/>
-            </div>
-            <div>
-              <PolygonOpac/>
             </div>
           </Slider>
         </div>
