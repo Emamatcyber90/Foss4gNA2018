@@ -85,11 +85,7 @@ export default class MAP extends Component {
       store.dispatch(SdkMapActions.addFeatures('cafe', [{
         type: 'Feature',
         properties: {name: feature.properties.name},
-        geometry: {
-          type: 'Point',
-          // this generates a point somewhere on the planet, unbounded.
-          coordinates: [feature.geometry.coordinates[0], feature.geometry.coordinates[1]],
-        },
+        geometry: feature.geometry,
       }]));
     }
   }

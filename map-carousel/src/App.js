@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-// import {createStore, combineReducers} from 'redux';
 import Slider from 'react-slick';
 
 import ZoomWithout from './maps/zoom/ZoomWithout';
@@ -9,26 +8,11 @@ import LayerListWith from './maps/layerList/layerListWith';
 import LayerListWithout from './maps/layerList/layerListWithout';
 import BigIcon from './maps/featureStyle/bigIcons';
 import SmallIcon from './maps/featureStyle/smallerIcons';
+import PolygonSolid from './maps/featureStyle/polygonSolid';
 
-// import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
-// import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import Title from './title.js';
-//
-// const store = createStore(combineReducers({
-//   'map': SdkMapReducer,
-// }));
 
 class App extends Component {
-  componentDidMount() {
-  // // add the OSM source
-  //   store.dispatch(SdkMapActions.addOsmSource('osm'));
-  //
-  //   // add an OSM layer
-  //   store.dispatch(SdkMapActions.addLayer({
-  //     id: 'osm',
-  //     source: 'osm',
-  //   }));
-  }
 
   constructor(props) {
     super(props);
@@ -40,10 +24,6 @@ class App extends Component {
   }
   previous() {
     this.slider.slickPrev();
-  }
-  handleKeyPress(event) {
-    // console.log(event.key);
-    // this.next();
   }
   render() {
     const settings = {
@@ -74,6 +54,9 @@ class App extends Component {
             </div>
             <div>
               <SmallIcon/>
+            </div>
+            <div>
+              <PolygonSolid/>
             </div>
           </Slider>
         </div>

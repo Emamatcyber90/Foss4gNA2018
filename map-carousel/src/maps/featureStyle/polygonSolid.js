@@ -5,7 +5,7 @@ import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
 
-import STL_CAFES from '../../data/stl_cafes.json';
+import STL_PARKS from '../../data/stl_parks.json';
 const store = createStore(combineReducers({
   'map': SdkMapReducer,
 }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -22,7 +22,7 @@ export default class MAP extends Component {
     }));
     // Start with a reasonable global view of hte map.
     store.dispatch(SdkMapActions.setView([-90.1911121, 38.6251834], 10));
-    store.dispatch(SdkMapActions.addSource('cafe', {
+    store.dispatch(SdkMapActions.addSource('park', {
       type: 'geojson',
       clusterRadius: 50,
       data: {
@@ -32,32 +32,13 @@ export default class MAP extends Component {
     }));
     store.dispatch(SdkMapActions.addLayer({
       id: 'random-points',
-      source: 'cafe',
-      type: 'symbol',
-      layout: {
-        'text-font': [
-          'FontAwesome normal',
-        ],
-        'text-size': 50,
-        'icon-optional': true,
-        // airplane icon
-        'text-field': '\uf0f4',
-      },
-      paint: {
-        'text-color': '#CF5300',
-      },
+      source: 'park',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#00ffff'
+      }
     }));
-    // store.dispatch(SdkMapActions.addLayer({
-    //   id: 'random-points',
-    //   source: 'cafe',
-    //   type: 'circle',
-    //   paint: {
-    //     'circle-radius': 3,
-    //     'circle-color': '#756bb1',
-    //     'circle-stroke-color': '#756bb1',
-    //   },
-    //   filter: ['!has', 'point_count'],
-    // }));
+
     store.dispatch(SdkMapActions.updateMetadata({
       'mapbox:groups': {
         base: {
@@ -77,19 +58,15 @@ export default class MAP extends Component {
         'bnd:hide-layerlist': true,
       },
     }));
-    this.quickAddPoint(STL_CAFES);
+    this.quickAddPoint(STL_PARKS);
   }
   quickAddPoint(json) {
     for (let i = 0; i < json.features.length; i++) {
       const feature = json.features[i];
-      store.dispatch(SdkMapActions.addFeatures('cafe', [{
+      store.dispatch(SdkMapActions.addFeatures('park', [{
         type: 'Feature',
         properties: {name: feature.properties.name},
-        geometry: {
-          type: 'Point',
-          // this generates a point somewhere on the planet, unbounded.
-          coordinates: [feature.geometry.coordinates[0], feature.geometry.coordinates[1]],
-        },
+        geometry: feature.geometry,
       }]));
     }
   }
