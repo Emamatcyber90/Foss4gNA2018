@@ -8,6 +8,7 @@ import {Provider} from 'react-redux';
 import SdkLayerListItem from '@boundlessgeo/sdk/components/layer-list-item';
 import {DragSource, DropTarget} from 'react-dnd';
 import {types, layerListItemSource, layerListItemTarget, collect, collectDrop} from '@boundlessgeo/sdk/components/layer-list-item';
+import STATES from '../../data/states.json';
 
 const store = createStore(combineReducers({
   'map': SdkMapReducer,
@@ -99,17 +100,29 @@ export default class MAP extends Component {
         features: [],
       },
     }));
-    // add the wms source
     store.dispatch(SdkMapActions.addSource('states', {
-      type: 'raster',
-      tileSize: 256,
-      tiles: ['https://demo.boundlessgeo.com/geoserver/usa/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/png&SRS=EPSG:900913&LAYERS=topp:states&STYLES=&WIDTH=256&HEIGHT=256&BBOX={bbox-epsg-3857}'],
+      type: 'geojson',
+      clusterRadius: 50,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
     }));
-    // add the wms layer
     store.dispatch(SdkMapActions.addLayer({
-      id: 'states',
+      id: 'states-fill',
       source: 'states',
-      type: 'raster',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#eeffee'
+      }
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'states-line',
+      source: 'states',
+      type: 'line',
+      'paint': {
+        'line-color': '#aa33ee'
+      }
     }));
     store.dispatch(SdkMapActions.addLayer({
       id: 'random-points',
@@ -123,7 +136,7 @@ export default class MAP extends Component {
       filter: ['!has', 'point_count'],
     }));
     this.addRandomPoints(200);
-
+    this.quickAddPolygon(STATES);
   }
 
   // Add a random point to the map
@@ -146,7 +159,16 @@ export default class MAP extends Component {
       }]));
     }
   }
-
+  quickAddPolygon(json) {
+    for (let i = 0; i < json.features.length; i++) {
+      const feature = json.features[i];
+      store.dispatch(SdkMapActions.addFeatures('states', [{
+        type: 'Feature',
+        properties: {name: feature.properties.name},
+        geometry: feature.geometry,
+      }]));
+    }
+  }
   render() {
     return (
       <div  className="slideContent">
