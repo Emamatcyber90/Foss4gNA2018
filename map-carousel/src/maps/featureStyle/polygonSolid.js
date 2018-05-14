@@ -6,6 +6,7 @@ import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
 
 import STL_PARKS from '../../data/stl_parks.json';
+import STL_TAX from '../../data/stl_tax_codes.json';
 const store = createStore(combineReducers({
   'map': SdkMapReducer,
 }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -38,6 +39,23 @@ export default class MAP extends Component {
         'fill-color': '#00ffff'
       }
     }));
+    store.dispatch(SdkMapActions.addSource('tax', {
+      type: 'geojson',
+      clusterRadius: 50,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'tax area',
+      source: 'tax',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#2ca25f',
+        'line-color': '#000000'
+      }
+    }));
 
     store.dispatch(SdkMapActions.updateMetadata({
       'mapbox:groups': {
@@ -58,12 +76,13 @@ export default class MAP extends Component {
         'bnd:hide-layerlist': true,
       },
     }));
-    this.quickAddPoint(STL_PARKS);
+    this.quickAddPoint(STL_PARKS, 'park');
+    this.quickAddPoint(STL_TAX, 'tax');
   }
-  quickAddPoint(json) {
+  quickAddPoint(json, sourceName) {
     for (let i = 0; i < json.features.length; i++) {
       const feature = json.features[i];
-      store.dispatch(SdkMapActions.addFeatures('park', [{
+      store.dispatch(SdkMapActions.addFeatures(sourceName, [{
         type: 'Feature',
         properties: {name: feature.properties.name},
         geometry: feature.geometry,
@@ -74,7 +93,7 @@ export default class MAP extends Component {
     return (
       <div  className="slideContent">
         <content>
-          <div className="left skinny">Big Icons</div>
+          <div className="left skinny">St. Louis Park and Tax districts</div>
           <div className="right fat">
             <h3>title</h3>
             <map>

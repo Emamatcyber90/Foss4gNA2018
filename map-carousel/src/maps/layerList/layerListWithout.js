@@ -113,14 +113,7 @@ export default class MAP extends Component {
       source: 'states',
       type: 'fill',
       'paint': {
-        'fill-color': '#eeffee'
-      }
-    }));
-    store.dispatch(SdkMapActions.addLayer({
-      id: 'states-line',
-      source: 'states',
-      type: 'line',
-      'paint': {
+        'fill-color': '#eeffee',
         'line-color': '#aa33ee'
       }
     }));
@@ -173,9 +166,9 @@ export default class MAP extends Component {
     return (
       <div  className="slideContent">
         <content>
-          <div className="left skinny">random-ness</div>
+          <div className="left skinny"></div>
           <div className="right fat">
-            <h3>title</h3>
+            <h3>What is going on here</h3>
             <map>
               <Provider store={store}>
                 <SdkMap store={store} />

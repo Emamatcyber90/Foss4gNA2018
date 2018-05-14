@@ -15,6 +15,20 @@ const store = createStore(combineReducers({
 }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 class LayerListItem extends SdkLayerListItem {
+  changeOpacity() {
+    const layer = this.props.layer;
+    let opacity = 1;
+    if (layer.paint['fill-opacity'] === undefined || layer.paint['fill-opacity'] === 1) {
+      opacity = .5;
+    } else if (layer.paint['fill-opacity'] === .5) {
+      opacity = .25;
+    }
+    store.dispatch(SdkMapActions.updateLayer(layer.id, {
+      paint: Object.assign({}, layer.paint, {
+        'fill-opacity': opacity,
+      })
+    }));
+  }
   render() {
     const layer = this.props.layer;
     const checkbox = this.getVisibilityControl(layer);
@@ -35,6 +49,11 @@ class LayerListItem extends SdkLayerListItem {
           this.removeLayer();
         }}>
           { this.props.labels.remove }
+        </button>
+        <button className="sdk-btn" onClick={() => {
+          this.changeOpacity('this.props.layers');
+        }}>
+          Change opacity
         </button>
       </span>
     );
@@ -113,14 +132,7 @@ export default class MAP extends Component {
       source: 'states',
       type: 'fill',
       'paint': {
-        'fill-color': '#eeffee'
-      }
-    }));
-    store.dispatch(SdkMapActions.addLayer({
-      id: 'states-line',
-      source: 'states',
-      type: 'line',
-      'paint': {
+        'fill-color': '#eeffee',
         'line-color': '#aa33ee'
       }
     }));
@@ -173,9 +185,9 @@ export default class MAP extends Component {
     return (
       <div  className="slideContent">
         <content>
-          <div className="left skinny">random-ness</div>
+          <div className="left skinny"></div>
           <div className="right fat">
-            <h3>title</h3>
+            <h3>Look a layer, now we have an idea</h3>
             <Provider store={store}>
               <SdkLayerList layerClass={LayerListItem} />
             </Provider>
