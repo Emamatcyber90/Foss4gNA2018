@@ -7,6 +7,8 @@ import {Provider} from 'react-redux';
 
 import STL_PARKS from '../../data/stl_parks.json';
 import STL_TAX from '../../data/stl_tax_codes.json';
+import STL_NEIGHBOR from '../../data/Neighborhoods.json';
+
 const store = createStore(combineReducers({
   'map': SdkMapReducer,
 }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -55,9 +57,28 @@ export default class MAP extends Component {
         'fill-color': '#2ca25f',
         'line-color': '#000000',
         'fill-opacity': .2,
+        'line-opacity': .2,
       }
     }));
-
+    store.dispatch(SdkMapActions.addSource('neighborhood', {
+      type: 'geojson',
+      clusterRadius: 50,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'neighborhood area',
+      source: 'neighborhood',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#2ca25f',
+        'line-color': '#000000',
+        'fill-opacity': .2,
+        'line-opacity': .2,
+      }
+    }));
     store.dispatch(SdkMapActions.updateMetadata({
       'mapbox:groups': {
         base: {
@@ -79,6 +100,7 @@ export default class MAP extends Component {
     }));
     this.quickAddPoint(STL_PARKS, 'park');
     this.quickAddPoint(STL_TAX, 'tax');
+    this.quickAddPoint(STL_NEIGHBOR, 'neighborhood');
   }
   quickAddPoint(json, sourceName) {
     for (let i = 0; i < json.features.length; i++) {
