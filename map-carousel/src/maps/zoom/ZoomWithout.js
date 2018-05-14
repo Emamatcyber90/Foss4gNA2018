@@ -12,7 +12,9 @@ const store = createStore(combineReducers({
 
 export default class ZoomWithout extends Component {
   componentDidMount() {
-  // add the OSM source
+    store.dispatch(SdkMapActions.setView([-90, 38], 7));
+
+    // add the OSM source
     store.dispatch(SdkMapActions.addOsmSource('osm'));
 
     // add an OSM layer
@@ -23,9 +25,9 @@ export default class ZoomWithout extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="slideContent">
         <content>
-          <div className="left skinny">random-ness</div>
+          <div className="left skinny">Click and Zoom in</div>
           <div className="right fat">
             <h3>title</h3>
             <map>
@@ -35,7 +37,7 @@ export default class ZoomWithout extends Component {
               </Provider>
             </map>
             <div className="caption">
-              caption here
+              Who needs zoom buttons?
             </div>
           </div>
         </content>

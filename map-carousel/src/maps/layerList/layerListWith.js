@@ -70,7 +70,7 @@ export default class MAP extends Component {
       source: 'osm',
     }));
     // Start with a reasonable global view of hte map.
-    store.dispatch(SdkMapActions.setView([-93, 45], 2));
+    store.dispatch(SdkMapActions.setView([-90, 38], 2));
 
     store.dispatch(SdkMapActions.updateMetadata({
       'mapbox:groups': {
@@ -149,7 +149,7 @@ export default class MAP extends Component {
 
   render() {
     return (
-      <div>
+      <div  className="slideContent">
         <content>
           <div className="left skinny">random-ness</div>
           <div className="right fat">

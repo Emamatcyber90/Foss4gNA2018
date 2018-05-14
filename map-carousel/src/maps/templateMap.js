@@ -22,10 +22,25 @@ export default class MAP extends Component {
   }
   render() {
     return (
-      <Provider store={store}>
-        <SdkMap store={store} >
-        </SdkMap>
-      </Provider>
+      <div  className="slideContent">
+        <content>
+          <div className="left skinny">random-ness</div>
+          <div className="right fat">
+            <h3>title</h3>
+            <map>
+              <Provider store={store}>
+                <SdkMap store={store} />
+              </Provider>
+            </map>
+            <div className="caption">
+              caption here
+            </div>
+          </div>
+        </content>
+        <footer>
+          FOOTER HERE
+        </footer>
+      </div>
     );
   }
 }

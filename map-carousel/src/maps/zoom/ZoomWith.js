@@ -13,7 +13,9 @@ const store = createStore(combineReducers({
 
 export default class ZoomWith extends Component {
   componentDidMount() {
-  // add the OSM source
+    store.dispatch(SdkMapActions.setView([-90, 38], 7));
+
+    // add the OSM source
     store.dispatch(SdkMapActions.addOsmSource('osm'));
 
     // add an OSM layer
@@ -26,9 +28,9 @@ export default class ZoomWith extends Component {
     return (
       <div className="slideContent">
         <content>
-          <div className="left skinny">random-ness</div>
+          <div className="left skinny"></div>
           <div className="right fat">
-            <h3>title</h3>
+            <h3>Map with Zoom</h3>
             <map>
               <Provider store={store}>
                 <SdkMap store={store} >
@@ -37,7 +39,7 @@ export default class ZoomWith extends Component {
               </Provider>
             </map>
             <div className="caption">
-              caption here
+              You need a Zoom
             </div>
           </div>
         </content>

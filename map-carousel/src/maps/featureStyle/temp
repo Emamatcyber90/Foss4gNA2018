@@ -1,0 +1,18 @@
+const addLayerFromGeoJSON = (url, sourceName) => {
+  store.dispatch(mapActions.addLayer({
+    id: 'dynamic-layer',
+    type: 'symbol',
+    source: 'dynamic-source',
+    layout: {
+      'text-font': [
+        'FontAwesome normal',
+      ],
+      'text-size': 50,
+      'icon-optional': true,
+      // airplane icon
+      'text-field': '\uf072',
+    },
+    paint: {
+      'text-color': '#CF5300',
+    },
+  }));

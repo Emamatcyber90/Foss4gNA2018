@@ -1,31 +1,33 @@
 import React, {Component} from 'react';
 import './App.css';
-import {createStore, combineReducers} from 'redux';
+// import {createStore, combineReducers} from 'redux';
 import Slider from 'react-slick';
 
 import ZoomWithout from './maps/zoom/ZoomWithout';
 import ZoomWith from './maps/zoom/ZoomWith';
 import LayerListWith from './maps/layerList/layerListWith';
-// import LayerListWithout from './maps/layerList/layerListWithout';
+import LayerListWithout from './maps/layerList/layerListWithout';
+import BigIcon from './maps/featureStyle/bigIcons';
+import SmallIcon from './maps/featureStyle/smallerIcons';
 
-import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
-import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
+// import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
+// import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import Title from './title.js';
-
-const store = createStore(combineReducers({
-  'map': SdkMapReducer,
-}));
+//
+// const store = createStore(combineReducers({
+//   'map': SdkMapReducer,
+// }));
 
 class App extends Component {
   componentDidMount() {
-  // add the OSM source
-    store.dispatch(SdkMapActions.addOsmSource('osm'));
-
-    // add an OSM layer
-    store.dispatch(SdkMapActions.addLayer({
-      id: 'osm',
-      source: 'osm',
-    }));
+  // // add the OSM source
+  //   store.dispatch(SdkMapActions.addOsmSource('osm'));
+  //
+  //   // add an OSM layer
+  //   store.dispatch(SdkMapActions.addLayer({
+  //     id: 'osm',
+  //     source: 'osm',
+  //   }));
   }
 
   constructor(props) {
@@ -56,13 +58,22 @@ class App extends Component {
               <Title/>
             </div>
             <div>
-              <ZoomWith/>
-            </div>
-            <div>
               <ZoomWithout/>
             </div>
             <div>
+              <ZoomWith/>
+            </div>
+            <div>
+              <LayerListWithout/>
+            </div>
+            <div>
               <LayerListWith/>
+            </div>
+            <div>
+              <BigIcon/>
+            </div>
+            <div>
+              <SmallIcon/>
             </div>
           </Slider>
         </div>
