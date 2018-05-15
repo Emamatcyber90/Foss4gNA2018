@@ -4,6 +4,8 @@ import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
+import pageOne from '../../img/BoundlessLogo2018.png';
+
 // import SdkLayerList from '@boundlessgeo/sdk/components/layer-list';
 import SdkLayerListItem from '@boundlessgeo/sdk/components/layer-list-item';
 import {DragSource, DropTarget} from 'react-dnd';

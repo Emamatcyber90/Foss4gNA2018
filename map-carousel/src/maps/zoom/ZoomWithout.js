@@ -5,6 +5,7 @@ import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
+import pageOne from '../../img/BoundlessLogo2018.png';
 
 const store = createStore(combineReducers({
   'map': SdkMapReducer,

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {createStore, combineReducers} from 'redux';
 import SdkZoomControl from '@boundlessgeo/sdk/components/map/zoom-control';
+import pageOne from '../../img/BoundlessLogo2018.png';
+
 
 import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
