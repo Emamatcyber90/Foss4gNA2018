@@ -11,6 +11,7 @@ import SmallIcon from './maps/featureStyle/smallerIcons';
 import PolygonSolid from './maps/featureStyle/polygonSolid';
 
 import Title from './title.js';
+import Sdk from './sdkSlide.js';
 
 class App extends Component {
 
@@ -36,6 +37,9 @@ class App extends Component {
           <Slider {...settings}>
             <div>
               <Title/>
+            </div>
+            <div>
+              <Sdk/>
             </div>
             <div>
               <ZoomWithout/>

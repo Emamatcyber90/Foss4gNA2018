@@ -79,6 +79,7 @@ export default class MAP extends Component {
     }
   }
   render() {
+
     return (
       <div  className="slideContent">
         <content>

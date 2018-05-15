@@ -5,7 +5,9 @@ import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
 
-import STL_CAFES from '../../data/stl_cafes.json';
+import STL_PARKS from '../../data/stl_parks.json';
+import STL_TAX from '../../data/stl_tax_codes.json';
+import STL_NEIGHBOR from '../../data/Neighborhoods.json';
 const store = createStore(combineReducers({
   'map': SdkMapReducer,
 }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -22,7 +24,7 @@ export default class MAP extends Component {
     }));
     // Start with a reasonable global view of hte map.
     store.dispatch(SdkMapActions.setView([-90.1911121, 38.6251834], 10));
-    store.dispatch(SdkMapActions.addSource('cafe', {
+    store.dispatch(SdkMapActions.addSource('park', {
       type: 'geojson',
       clusterRadius: 50,
       data: {
@@ -32,20 +34,47 @@ export default class MAP extends Component {
     }));
     store.dispatch(SdkMapActions.addLayer({
       id: 'random-points',
-      source: 'cafe',
-      type: 'symbol',
-      layout: {
-        'text-font': [
-          'FontAwesome normal',
-        ],
-        'text-size': 50,
-        'icon-optional': true,
-        'text-field': '\uf111',
-      },
-      paint: {
-        'text-color': '#CF5300',
+      source: 'park',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#00ffff'
+      }
+    }));
+    store.dispatch(SdkMapActions.addSource('tax', {
+      type: 'geojson',
+      clusterRadius: 50,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
       },
     }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'tax area',
+      source: 'tax',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#2ca25f',
+        'line-color': '#000000'
+      }
+    }));
+    store.dispatch(SdkMapActions.addSource('neighborhood', {
+      type: 'geojson',
+      clusterRadius: 50,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'neighborhood area',
+      source: 'neighborhood',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#2ca25f',
+        'line-color': '#000000'
+      }
+    }));
+
     store.dispatch(SdkMapActions.updateMetadata({
       'mapbox:groups': {
         base: {
@@ -65,38 +94,27 @@ export default class MAP extends Component {
         'bnd:hide-layerlist': true,
       },
     }));
-    this.quickAddPoint(STL_CAFES);
+    this.quickAddPoint(STL_PARKS, 'park');
+    this.quickAddPoint(STL_TAX, 'tax');
+    this.quickAddPoint(STL_NEIGHBOR, 'neighborhood');
   }
-  quickAddPoint(json) {
+  quickAddPoint(json, sourceName) {
     for (let i = 0; i < json.features.length; i++) {
       const feature = json.features[i];
-      store.dispatch(SdkMapActions.addFeatures('cafe', [{
+      store.dispatch(SdkMapActions.addFeatures(sourceName, [{
         type: 'Feature',
         properties: {name: feature.properties.name},
         geometry: feature.geometry,
       }]));
     }
   }
-  coffeeShape() {
-    console.log(store.map);
-    // store.dispatch(SdkMapActions.updateLayer('cafe', {
-    //   paint: Object.assign({}, layer.paint, {
-    //     'fill-opacity': opacity,
-    //   })
-    // }));
-  }
   render() {
-    const button = (
-      <button onClick={() => this.coffeeShape()}>Coffee Shop</button>
-    );
     return (
       <div  className="slideContent">
         <content>
-          <div className="left skinny">
-            {button}
-          </div>
+          <div className="left skinny">St. Louis Park and Tax districts</div>
           <div className="right fat">
-            <h3>Coffee Shops Near FOSS 4G</h3>
+            <h3>title</h3>
             <map>
               <Provider store={store}>
                 <SdkMap store={store} />
