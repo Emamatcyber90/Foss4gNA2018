@@ -5,6 +5,13 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css";
 // @import "/node_modules/sanitize.css/sanitize.css";
 
+@mixin sdk-button {
+    padding: 8px;
+    margin-right: 6px;
+}
+
+
+
 html, body {
   height: 100%;
 }
@@ -96,26 +103,32 @@ html, body {
       display: block;
     }
     .layer {
-      background-color: green;
       margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      // border: 1px dashed #333;
       .checkbox {
+
         input {
           width: 32px;
           height: 32px;
         }
-        background-color: blue;
-        display: inline-block;
       }
       .name {
         margin-right: 10px;
       }
       .btn-container {
+        flex: 1;
+        text-align: right;
         .sdk-btn {
-          padding: 0;
+          @include sdk-button;
         }
       }
     }
 }
 .sdk-popup {
   width: 300px;
+}
+.sdk-btn {
+  @include sdk-button;
 }
