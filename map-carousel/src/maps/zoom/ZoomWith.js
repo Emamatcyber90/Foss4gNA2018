@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import {createStore, combineReducers} from 'redux';
 import SdkZoomControl from '@boundlessgeo/sdk/components/map/zoom-control';
+import pageOne from '../../img/BoundlessLogo2018.png';
 
 import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
 
-const store = createStore(combineReducers({
-  'map': SdkMapReducer,
-}));
+const store = createStore(combineReducers({'map': SdkMapReducer}));
 
 export default class ZoomWith extends Component {
   componentDidMount() {
@@ -49,7 +48,7 @@ export default class ZoomWith extends Component {
           </div>
         </content>
         <footer>
-        <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
+          <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
         </footer>
       </div>
     );

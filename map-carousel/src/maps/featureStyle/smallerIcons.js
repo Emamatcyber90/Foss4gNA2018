@@ -4,11 +4,10 @@ import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
+import pageOne from '../../img/BoundlessLogo2018.png';
 
 import STL_CAFES from '../../data/stl_cafes.json';
-const store = createStore(combineReducers({
-  'map': SdkMapReducer,
-}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(combineReducers({'map': SdkMapReducer}));
 
 export default class MAP extends Component {
   componentDidMount() {
@@ -102,7 +101,7 @@ export default class MAP extends Component {
           </div>
         </content>
         <footer>
-        <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
+          <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
         </footer>
       </div>
     );
