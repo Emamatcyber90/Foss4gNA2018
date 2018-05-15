@@ -402,7 +402,8 @@ html, body {
 .Map-container .landing {
   background: url(img/page-one.png) no-repeat center center;
   background-size: cover;
-  color: #fff; }
+  color: #fff;
+  align-items: center; }
   .Map-container .landing h1 {
     margin: 0;
     padding-top: 260px;
@@ -411,6 +412,7 @@ html, body {
     text-align: center;
     margin: 0; }
   .Map-container .landing .names {
+    width: 60%;
     display: flex;
     align-items: stretch; }
     .Map-container .landing .names span {
