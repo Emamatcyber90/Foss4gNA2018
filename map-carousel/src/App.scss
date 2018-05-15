@@ -27,8 +27,13 @@ html, body {
     height: calc(100vh - 20px);
     display: flex;
     flex-direction: column;
-    content {
+    header {
+      text-align: left;
       padding-top: 60px;
+      padding-bottom: 20px;
+    }
+    content {
+
       // background-color: lightgrey;
       text-align: left;
       display: flex;

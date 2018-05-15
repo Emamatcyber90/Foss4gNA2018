@@ -170,10 +170,10 @@ export default class MAP extends Component {
   render() {
     return (
       <div  className="slideContent">
+        <header><h3>What is going on here</h3></header>
         <content>
           <div className="left skinny"></div>
           <div className="right fat">
-            <h3>What is going on here</h3>
             <map>
               <Provider store={store}>
                 <SdkMap store={store} />

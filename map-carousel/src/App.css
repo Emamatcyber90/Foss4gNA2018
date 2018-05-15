@@ -269,10 +269,9 @@ h2 {
 
 h3 {
   font-weight: normal;
-  text-transform: uppercase;
   font-size: 150%;
   letter-spacing: 0.15em;
-  margin: 0 0.8em; }
+  margin: 0 0; }
 
 h4 {
   font-weight: normal;
@@ -385,8 +384,11 @@ html, body {
   height: calc(100vh - 20px);
   display: flex;
   flex-direction: column; }
-  .Map-container .slideContent content {
+  .Map-container .slideContent header {
+    text-align: left;
     padding-top: 60px;
+    padding-bottom: 20px; }
+  .Map-container .slideContent content {
     text-align: left;
     display: flex;
     flex: 1 0 auto; }

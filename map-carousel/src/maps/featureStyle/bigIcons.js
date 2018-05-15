@@ -101,12 +101,12 @@ export default class MAP extends Component {
     );
     return (
       <div  className="slideContent">
+        <header><h3>Coffee Shops Near FOSS 4G</h3></header>
         <content>
           <div className="left skinny">
             {button}
           </div>
           <div className="right fat">
-            <h3>Coffee Shops Near FOSS 4G</h3>
             <map>
               <Provider store={store}>
                 <SdkMap store={store} />

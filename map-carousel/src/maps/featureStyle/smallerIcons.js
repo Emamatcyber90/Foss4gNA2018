@@ -86,10 +86,10 @@ export default class MAP extends Component {
 
     return (
       <div  className="slideContent">
+        <header><h3>Big Icons</h3></header>
         <content>
-          <div className="left skinny">Big Icons</div>
+          <div className="left skinny"></div>
           <div className="right fat">
-            <h3>title</h3>
             <map>
               <Provider store={store}>
                 <SdkMap store={store} />
