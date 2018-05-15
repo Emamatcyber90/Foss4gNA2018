@@ -5,62 +5,19 @@ import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
 import pageOne from '../../img/BoundlessLogo2018.png';
+import SdkZoomControl from '@boundlessgeo/sdk/components/map/zoom-control';
 
-// import SdkLayerList from '@boundlessgeo/sdk/components/layer-list';
-import SdkLayerListItem from '@boundlessgeo/sdk/components/layer-list-item';
-import {DragSource, DropTarget} from 'react-dnd';
-import {types, layerListItemSource, layerListItemTarget, collect, collectDrop} from '@boundlessgeo/sdk/components/layer-list-item';
 import STATES from '../../data/states.json';
 
 const store = createStore(combineReducers({'map': SdkMapReducer}));
 
-class LayerListItem extends SdkLayerListItem {
-  render() {
-    const layer = this.props.layer;
-    const checkbox = this.getVisibilityControl(layer);
-
-    const moveButtons = (
-      <span>
-        <button className="sdk-btn" onClick={() => {
-          this.moveLayerUp();
-        }}>
-          { this.props.labels.up }
-        </button>
-        <button className="sdk-btn" onClick={() => {
-          this.moveLayerDown();
-        }}>
-          { this.props.labels.down }
-        </button>
-        <button className="sdk-btn" onClick={() => {
-          this.removeLayer();
-        }}>
-          { this.props.labels.remove }
-        </button>
-      </span>
-    );
-
-    return  this.props.connectDragSource(this.props.connectDropTarget((
-      <li className="layer">
-        <span className="checkbox">{checkbox}</span>
-        <span className="name">{layer.id}</span>
-        <span className="btn-container">{moveButtons}</span>
-      </li>
-    )));
-  }
-}
-
-LayerListItem.defaultProps = {
-  labels: {
-    up: 'Move up',
-    down: 'Move down',
-    remove: 'Remove layer',
-  },
-};
-
-LayerListItem = DropTarget(types, layerListItemTarget, collectDrop)(DragSource(types, layerListItemSource, collect)(LayerListItem));
-
-
 export default class MAP extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+  }
   componentDidMount() {
     store.dispatch(SdkMapActions.addSource('mblight', {
       type: 'raster',
@@ -168,19 +125,33 @@ export default class MAP extends Component {
     }
   }
   render() {
+    let answer = false;
+    if (this.state.show) {
+      answer = (<span>
+        <h3>No legend</h3>
+        <h3>No Layer List</h3>
+        <h3>No Labels</h3>
+        <h3>Colors tell nothing</h3>
+      </span>);
+    }
     return (
       <div  className="slideContent">
-        <header><h3>What is going on here</h3></header>
+        <header><h3>What is going on here?</h3></header>
         <content>
-          <div className="left skinny"></div>
+          <div className="left skinny">
+            A good answer gets swag.
+            <button onClick={()=>this.setState({show: true})}>show</button>
+            {answer}
+          </div>
           <div className="right fat">
             <map>
               <Provider store={store}>
-                <SdkMap store={store} />
+                <SdkMap store={store}>
+                  <SdkZoomControl />
+                </SdkMap>
               </Provider>
             </map>
             <div className="caption">
-              caption here
             </div>
           </div>
         </content>

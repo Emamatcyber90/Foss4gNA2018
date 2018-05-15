@@ -40,7 +40,8 @@ export default class ZoomWithout extends Component {
           <div className="left skinny">
             <h3>Find a problem get some swag</h3>
             <button onClick={()=>this.setState({show: true})}>show</button>
-            {this.state.show ? <h3>Zoom Buttons</h3> : false}</div>
+            {this.state.show ? <h3>Zoom Buttons</h3> : false}
+          </div>
           <div className="right fat">
             <map>
               <Provider store={store}>

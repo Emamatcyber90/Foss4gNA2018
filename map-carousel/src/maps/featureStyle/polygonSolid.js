@@ -5,6 +5,7 @@ import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
 import pageOne from '../../img/BoundlessLogo2018.png';
+import SdkZoomControl from '@boundlessgeo/sdk/components/map/zoom-control';
 
 import STL_PARKS from '../../data/stl_parks.json';
 import STL_TAX from '../../data/stl_tax_codes.json';
@@ -123,7 +124,9 @@ export default class MAP extends Component {
           <div className="right fat">
             <map>
               <Provider store={store}>
-                <SdkMap store={store} />
+                <SdkMap store={store}>
+                  <SdkZoomControl />
+                </SdkMap>
               </Provider>
             </map>
             <div className="caption">
