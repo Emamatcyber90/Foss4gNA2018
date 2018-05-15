@@ -7,19 +7,22 @@ import {Provider} from 'react-redux';
 import pageOne from '../../img/BoundlessLogo2018.png';
 
 import STL_CAFES from '../../data/stl_cafes.json';
-const store = createStore(combineReducers({
-  'map': SdkMapReducer,
-}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(combineReducers({'map': SdkMapReducer}));
 
 export default class MAP extends Component {
   componentDidMount() {
-    // add the OSM source
-    store.dispatch(SdkMapActions.addOsmSource('osm'));
+    store.dispatch(SdkMapActions.addSource('mblight', {
+      type: 'raster',
+      tileSize: 256,
+      tiles: [
+        'https://bcs.boundlessgeo.io/basemaps/mapbox/light/{z}/{x}/{y}.png?version=0.1&apikey=7ebdd7146b8e70445ef023e7df61dfc0'
+      ]
+    }));
 
     // add an OSM layer
     store.dispatch(SdkMapActions.addLayer({
       id: 'osm',
-      source: 'osm',
+      source: 'mblight',
     }));
     // Start with a reasonable global view of hte map.
     store.dispatch(SdkMapActions.setView([-90.1911121, 38.6251834], 10));
@@ -98,7 +101,7 @@ export default class MAP extends Component {
           </div>
         </content>
         <footer>
-        <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
+          <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
         </footer>
       </div>
     );

@@ -11,10 +11,9 @@ import SdkLayerListItem from '@boundlessgeo/sdk/components/layer-list-item';
 import {DragSource, DropTarget} from 'react-dnd';
 import {types, layerListItemSource, layerListItemTarget, collect, collectDrop} from '@boundlessgeo/sdk/components/layer-list-item';
 import STATES from '../../data/states.json';
+import pageOne from '../../img/BoundlessLogo2018.png';
 
-const store = createStore(combineReducers({
-  'map': SdkMapReducer,
-}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(combineReducers({'map': SdkMapReducer}));
 
 class LayerListItem extends SdkLayerListItem {
   changeOpacity() {
@@ -83,13 +82,18 @@ LayerListItem = DropTarget(types, layerListItemTarget, collectDrop)(DragSource(t
 
 export default class MAP extends Component {
   componentDidMount() {
-  // add the OSM source
-    store.dispatch(SdkMapActions.addOsmSource('osm'));
+    store.dispatch(SdkMapActions.addSource('mblight', {
+      type: 'raster',
+      tileSize: 256,
+      tiles: [
+        'https://bcs.boundlessgeo.io/basemaps/mapbox/light/{z}/{x}/{y}.png?version=0.1&apikey=7ebdd7146b8e70445ef023e7df61dfc0'
+      ]
+    }));
 
     // add an OSM layer
     store.dispatch(SdkMapActions.addLayer({
       id: 'osm',
-      source: 'osm',
+      source: 'mblight',
     }));
     // Start with a reasonable global view of hte map.
     store.dispatch(SdkMapActions.setView([-90, 38], 2));
@@ -205,7 +209,7 @@ export default class MAP extends Component {
           </div>
         </content>
         <footer>
-        <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
+          <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
         </footer>
       </div>
     );
