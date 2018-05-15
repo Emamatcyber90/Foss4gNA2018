@@ -35,17 +35,17 @@ class LayerListItem extends SdkLayerListItem {
 
     const moveButtons = (
       <span>
-        <button className="sdk-btn" onClick={() => {
+        <button className="sdk-btn fa fa-arrow-up" onClick={() => {
           this.moveLayerUp();
         }}>
           { this.props.labels.up }
         </button>
-        <button className="sdk-btn" onClick={() => {
+        <button className="sdk-btn fa fa-arrow-down" onClick={() => {
           this.moveLayerDown();
         }}>
           { this.props.labels.down }
         </button>
-        <button className="sdk-btn" onClick={() => {
+        <button className="sdk-btn fa fa-trash" onClick={() => {
           this.removeLayer();
         }}>
           { this.props.labels.remove }
@@ -70,9 +70,9 @@ class LayerListItem extends SdkLayerListItem {
 
 LayerListItem.defaultProps = {
   labels: {
-    up: 'Move up',
-    down: 'Move down',
-    remove: 'Remove layer',
+    up: '',
+    down: '',
+    remove: '',
   },
 };
 
@@ -91,7 +91,7 @@ export default class MAP extends Component {
 
     // add an OSM layer
     store.dispatch(SdkMapActions.addLayer({
-      id: 'osm',
+      id: 'Basemap',
       source: 'mblight',
     }));
     // Start with a reasonable global view of hte map.

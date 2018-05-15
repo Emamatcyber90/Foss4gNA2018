@@ -2,6 +2,7 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 @import "basic";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css";
 // @import "/node_modules/sanitize.css/sanitize.css";
 
 html, body {
@@ -88,6 +89,32 @@ html, body {
 }
 .sdk-map {
   height: 80%;
+}
+.sdk-layer-list {
+    padding: 0;
+    li {
+      display: block;
+    }
+    .layer {
+      background-color: green;
+      margin-bottom: 20px;
+      .checkbox {
+        input {
+          width: 32px;
+          height: 32px;
+        }
+        background-color: blue;
+        display: inline-block;
+      }
+      .name {
+        margin-right: 10px;
+      }
+      .btn-container {
+        .sdk-btn {
+          padding: 0;
+        }
+      }
+    }
 }
 .sdk-popup {
   width: 300px;
