@@ -185,12 +185,13 @@ export default class MAP extends Component {
     return (
       <div  className="slideContent">
         <content>
-          <div className="left skinny"></div>
-          <div className="right fat">
-            <h3>Look a layer, now we have an idea</h3>
+          <div className="left skinny">
             <Provider store={store}>
               <SdkLayerList layerClass={LayerListItem} />
             </Provider>
+          </div>
+          <div className="right fat">
+            <h3>Look a layer, now we have an idea</h3>
             <map>
               <Provider store={store}>
                 <SdkMap store={store} />

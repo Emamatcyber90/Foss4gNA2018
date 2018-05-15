@@ -405,5 +405,15 @@ html, body {
   color: #fff; }
   .Map-container .landing h1 {
     margin: 0;
-    padding-top: 360px;
+    padding-top: 260px;
     font-size: 60px; }
+  .Map-container .landing p {
+    text-align: center;
+    margin: 0; }
+  .Map-container .landing .names {
+    display: flex;
+    align-items: stretch; }
+    .Map-container .landing .names span {
+      flex: 1;
+      padding-top: 30px;
+      padding-bottom: 30px; }

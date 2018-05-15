@@ -126,7 +126,7 @@ export default class MAP extends Component {
           </div>
         </content>
         <footer>
-          FOOTER HERE
+          <img src="img/page-one.png"></img>
         </footer>
       </div>
     );
