@@ -7,7 +7,6 @@ import ZoomWith from './maps/zoom/ZoomWith';
 import LayerListWith from './maps/layerList/layerListWith';
 import LayerListWithout from './maps/layerList/layerListWithout';
 import BigIcon from './maps/featureStyle/bigIcons';
-import PolygonSolid from './maps/featureStyle/polygonSolid';
 import Popup from './maps/popup/popup';
 
 import Title from './title.js';
