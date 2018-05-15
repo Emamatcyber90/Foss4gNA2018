@@ -9,7 +9,13 @@
     padding: 6px 8px;
     margin-right: 6px;
 }
-
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
 
 
 html, body {
@@ -49,6 +55,10 @@ html, body {
         // background-color: green;
         flex: 2;
         padding-right: 20px;
+        .pull-right {
+
+          // @include clearfix;
+        }
       }
       .right {
         // background-color: blue;

@@ -34,7 +34,7 @@ export default class ZoomWith extends Component {
         <header><h3>Map with Zoom</h3></header>
         <content>
           <div className="left skinny">
-            <h3>Now a user regardless of platform can zoom in and out</h3>
+            <h6>Now a user regardless of platform can zoom in and out</h6>
           </div>
           <div className="right fat">
             <map>

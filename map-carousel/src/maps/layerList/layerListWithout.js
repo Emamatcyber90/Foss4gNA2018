@@ -128,10 +128,10 @@ export default class MAP extends Component {
     let answer = false;
     if (this.state.show) {
       answer = (<span>
-        <h3>No legend</h3>
-        <h3>No Layer List</h3>
-        <h3>No Labels</h3>
-        <h3>Colors tell nothing</h3>
+        <p>No legend</p>
+        <p>No Layer List</p>
+        <p>No Labels</p>
+        <p>Colors tell nothing</p>
       </span>);
     }
     return (
@@ -139,8 +139,8 @@ export default class MAP extends Component {
         <header><h3>What is going on here?</h3></header>
         <content>
           <div className="left skinny">
-            A good answer gets swag.
-            <button onClick={()=>this.setState({show: true})}>show</button>
+            <h6>A good answer gets swag.</h6>
+            <button className="sdk-btn" onClick={()=>this.setState({show: true})}>show</button>
             {answer}
           </div>
           <div className="right fat">

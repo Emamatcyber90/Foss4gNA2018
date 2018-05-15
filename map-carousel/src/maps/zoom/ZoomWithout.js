@@ -38,9 +38,9 @@ export default class ZoomWithout extends Component {
         <header><h3>Simple first map</h3></header>
         <content>
           <div className="left skinny">
-            <h3>Find a problem get some swag</h3>
-            <button onClick={()=>this.setState({show: true})}>show</button>
-            {this.state.show ? <h3>Zoom Buttons</h3> : false}
+            <h6>Find a problem get some swag</h6>
+            <button className="sdk-btn right" onClick={()=>this.setState({show: true})}>show</button>
+            {this.state.show ? <p>Zoom Buttons</p> : false}
           </div>
           <div className="right fat">
             <map>
@@ -50,7 +50,7 @@ export default class ZoomWithout extends Component {
               </Provider>
             </map>
             <div className="caption">
-              Who needs zoom buttons?
+
             </div>
           </div>
         </content>

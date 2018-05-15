@@ -198,7 +198,7 @@ export default class MAP extends Component {
         </header>
         <content>
           <div className="left skinny">
-            <button onClick={() => this.setState({show: true})}>show</button>
+            <button className="sdk-btn" onClick={() => this.setState({show: true})}>show</button>
             {this.state.show ? <ul>{this.buildAttrListFromState()}</ul> : false}
           </div>
           <div className="right fat">
