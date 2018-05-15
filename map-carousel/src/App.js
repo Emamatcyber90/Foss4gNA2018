@@ -7,7 +7,6 @@ import ZoomWith from './maps/zoom/ZoomWith';
 import LayerListWith from './maps/layerList/layerListWith';
 import LayerListWithout from './maps/layerList/layerListWithout';
 import BigIcon from './maps/featureStyle/bigIcons';
-import SmallIcon from './maps/featureStyle/smallerIcons';
 import PolygonSolid from './maps/featureStyle/polygonSolid';
 
 import Title from './title.js';
@@ -31,7 +30,7 @@ class App extends Component {
       dots: true,
       draggable: false,
     };
-    return (
+    let full = (
       <div className="App">
         <div className="Map-container">
           <Slider {...settings}>
@@ -57,15 +56,22 @@ class App extends Component {
               <BigIcon/>
             </div>
             <div>
-              <SmallIcon/>
-            </div>
-            <div>
               <PolygonSolid/>
             </div>
           </Slider>
         </div>
       </div>
     );
+    full = (<div className="App">
+      <div className="Map-container">
+        <Slider {...settings}>
+          <div>
+            <BigIcon/>
+          </div>
+        </Slider>
+      </div>
+    </div>);
+    return full;
   }
 }
 

@@ -7,7 +7,9 @@ import {Provider} from 'react-redux';
 import pageOne from '../../img/BoundlessLogo2018.png';
 
 import STL_CAFES from '../../data/stl_cafes.json';
-const store = createStore(combineReducers({'map': SdkMapReducer}));
+const store = createStore(combineReducers({
+  'map': SdkMapReducer,
+}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default class MAP extends Component {
   componentDidMount() {
@@ -83,21 +85,52 @@ export default class MAP extends Component {
   }
   coffeeShape() {
     // Being Lazing, should design better
-    const map = store.getState();
-    for (let i = 0; i <= map.layers.length; i++) {
-      if (map.layers[i].id === 'coffeePoints') {
-        console.log(map.layers[i].paint);
+    const state = store.getState();
+    const layers = state.map.layers;
+    for (let i = 0; i < layers.length; i++) {
+      if (layers[i].id === 'coffeePoints') {
+        store.dispatch(SdkMapActions.updateLayer('coffeePoints', {
+          layout: Object.assign({}, layers[i].layout, {
+            'text-field': '\uf0f4',
+          })
+        }));
       }
     }
-    // store.dispatch(SdkMapActions.updateLayer('cafe', {
-    //   paint: Object.assign({}, layer.paint, {
-    //     'fill-opacity': opacity,
-    //   })
-    // }));
+  }
+  smaller() {
+    // Being Lazing, should design better
+    const state = store.getState();
+    const layers = state.map.layers;
+    for (let i = 0; i < layers.length; i++) {
+      if (layers[i].id === 'coffeePoints') {
+        store.dispatch(SdkMapActions.updateLayer('coffeePoints', {
+          layout: Object.assign({}, layers[i].layout, {
+            'text-size': 18,
+          })
+        }));
+      }
+    }
+  }
+  redder() {
+    // Being Lazing, should design better
+    const state = store.getState();
+    const layers = state.map.layers;
+    for (let i = 0; i < layers.length; i++) {
+      if (layers[i].id === 'coffeePoints') {
+        store.dispatch(SdkMapActions.updateLayer('coffeePoints', {
+          paint: Object.assign({}, layers[i].paint, {
+            'text-color': '#e34a33',
+          })
+        }));
+      }
+    }
   }
   render() {
     const button = (
-      <button onClick={() => this.coffeeShape()}>Coffee Shop</button>
+      <span>
+        <button onClick={() => this.coffeeShape()}>Coffee Shape</button>
+        <button onClick={() => this.smaller()}>Smaller Size</button>
+      </span>
     );
     return (
       <div  className="slideContent">
