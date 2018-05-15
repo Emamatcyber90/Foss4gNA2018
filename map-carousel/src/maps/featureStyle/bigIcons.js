@@ -12,6 +12,12 @@ const store = createStore(combineReducers({
 }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default class MAP extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+  }
   componentDidMount() {
     store.dispatch(SdkMapActions.addSource('mblight', {
       type: 'raster',
@@ -49,7 +55,7 @@ export default class MAP extends Component {
         'text-field': '\uf111',
       },
       paint: {
-        'text-color': '#CF5300',
+        'text-color': '#756bb1',
       },
     }));
     store.dispatch(SdkMapActions.updateMetadata({
@@ -126,7 +132,6 @@ export default class MAP extends Component {
     }
   }
   render() {
-    let show = false;
     const buttons = (
       <span>
         <button onClick={() => this.coffeeShape()}>Coffee Shape</button>
@@ -139,10 +144,8 @@ export default class MAP extends Component {
         <header><h3>Coffee Shops Near FOSS 4G</h3></header>
         <content>
           <div className="left skinny">
-            <button onClick={()=>{
-              show = true;
-            }}>show</button>
-            {show ? buttons : false}
+            <button onClick={()=>this.setState({show: true})}>show</button>
+            {this.state.show ? buttons : false}
           </div>
           <div className="right fat">
             <map>

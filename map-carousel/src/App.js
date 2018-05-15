@@ -30,7 +30,7 @@ class App extends Component {
       dots: true,
       draggable: false,
     };
-    const full = (
+    let full = (
       <div className="App">
         <div className="Map-container">
           <Slider {...settings}>
@@ -62,15 +62,15 @@ class App extends Component {
         </div>
       </div>
     );
-    // full = (<div className="App">
-    //   <div className="Map-container">
-    //     <Slider {...settings}>
-    //       <div>
-    //         <BigIcon/>
-    //       </div>
-    //     </Slider>
-    //   </div>
-    // </div>);
+    full = (<div className="App">
+      <div className="Map-container">
+        <Slider {...settings}>
+          <div>
+            <BigIcon/>
+          </div>
+        </Slider>
+      </div>
+    </div>);
     return full;
   }
 }
