@@ -70,3 +70,53 @@ class App extends Component {
 }
 
 export default App;
+
+
+//   sources: {
+//     'bcs-mapbox-light': {
+//       type: 'raster',
+//       tileSize: 256,
+//       tiles: [
+//         'https://bcs.boundlessgeo.io/basemaps/mapbox/light/{z}/{x}/{y}.png?version=0.1&apikey=7ebdd7146b8e70445ef023e7df61dfc0'
+//       ]
+//     },
+//     'bcs-mapbox-dark': {
+//       type: 'raster',
+//       tileSize: 256,
+//       tiles: [
+//         'https://bcs.boundlessgeo.io/basemaps/mapbox/dark/{z}/{x}/{y}.png?version=0.1&apikey=7ebdd7146b8e70445ef023e7df61dfc0'
+//       ]
+//     },
+//     'bcs-mapbox-outdoors': {
+//       type: 'raster',
+//       tileSize: 256,
+//       tiles: [
+//         'https://bcs.boundlessgeo.io/basemaps/mapbox/outdoors/{z}/{x}/{y}.png?version=0.1&apikey=7ebdd7146b8e70445ef023e7df61dfc0'
+//       ]
+//     },
+//     'bcs-planet-2018_03': {
+//       type: 'raster',
+//       tileSize: 256,
+//       tiles: [
+//         'https://bcs.boundlessgeo.io/basemaps/planet/2018_03/{z}/{x}/{y}.png?version=0.1&apikey=7ebdd7146b8e70445ef023e7df61dfc0'
+//       ]
+//     },
+//     'bcs-planet-2016_01': {
+//       type: 'raster',
+//       tileSize: 256,
+//       tiles: [
+//         'https://bcs.boundlessgeo.io/basemaps/planet/2016_01/{z}/{x}/{y}.png?version=0.1&apikey=7ebdd7146b8e70445ef023e7df61dfc0'
+//       ]
+//     },
+//     countries: {
+//       type: 'geojson',
+//       metadata: {},
+//       data: {}
+//     },
+//     purchasing_data: {
+//       type: 'geojson',
+//       metadata: {},
+//       data: {}
+//     }
+//   }
+// }

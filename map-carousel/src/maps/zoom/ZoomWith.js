@@ -15,13 +15,18 @@ export default class ZoomWith extends Component {
   componentDidMount() {
     store.dispatch(SdkMapActions.setView([-90, 38], 7));
 
-    // add the OSM source
-    store.dispatch(SdkMapActions.addOsmSource('osm'));
+    store.dispatch(SdkMapActions.addSource('mblight', {
+      type: 'raster',
+      tileSize: 256,
+      tiles: [
+        'https://bcs.boundlessgeo.io/basemaps/mapbox/light/{z}/{x}/{y}.png?version=0.1&apikey=7ebdd7146b8e70445ef023e7df61dfc0'
+      ]
+    }));
 
     // add an OSM layer
     store.dispatch(SdkMapActions.addLayer({
       id: 'osm',
-      source: 'osm',
+      source: 'mblight',
     }));
   }
   render() {
