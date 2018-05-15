@@ -50,10 +50,9 @@ class LayerListItem extends SdkLayerListItem {
         }}>
           { this.props.labels.remove }
         </button>
-        <button className="sdk-btn" onClick={() => {
+        <button className="sdk-btn fa fa-rocket" onClick={() => {
           this.changeOpacity('this.props.layers');
         }}>
-          Change opacity
         </button>
       </span>
     );
