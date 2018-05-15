@@ -192,6 +192,7 @@ export default class MAP extends Component {
         <header><h3>Look a layer, now we have an idea</h3></header>
         <content>
           <div className="left skinny">
+            <h6>A layer list helps put a context to your data</h6>
             <Provider store={store}>
               <SdkLayerList layerClass={LayerListItem} />
             </Provider>
