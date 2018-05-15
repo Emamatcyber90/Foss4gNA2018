@@ -130,6 +130,7 @@ export default class MAP extends Component {
       <span>
         <button onClick={() => this.coffeeShape()}>Coffee Shape</button>
         <button onClick={() => this.smaller()}>Smaller Size</button>
+        <button onClick={() => this.redder()}>Redder color</button>
       </span>
     );
     return (
