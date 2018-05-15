@@ -7,9 +7,17 @@ import {Provider} from 'react-redux';
 import pageOne from '../../img/BoundlessLogo2018.png';
 
 import STL_CAFES from '../../data/stl_cafes.json';
-const store = createStore(combineReducers({'map': SdkMapReducer}));
+const store = createStore(combineReducers({
+  'map': SdkMapReducer,
+}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default class MAP extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+  }
   componentDidMount() {
     store.dispatch(SdkMapActions.addSource('mblight', {
       type: 'raster',
@@ -47,7 +55,7 @@ export default class MAP extends Component {
         'text-field': '\uf111',
       },
       paint: {
-        'text-color': '#CF5300',
+        'text-color': '#756bb1',
       },
     }));
     store.dispatch(SdkMapActions.updateMetadata({
@@ -83,28 +91,61 @@ export default class MAP extends Component {
   }
   coffeeShape() {
     // Being Lazing, should design better
-    const map = store.getState();
-    for (let i = 0; i <= map.layers.length; i++) {
-      if (map.layers[i].id === 'coffeePoints') {
-        console.log(map.layers[i].paint);
+    const state = store.getState();
+    const layers = state.map.layers;
+    for (let i = 0; i < layers.length; i++) {
+      if (layers[i].id === 'coffeePoints') {
+        store.dispatch(SdkMapActions.updateLayer('coffeePoints', {
+          layout: Object.assign({}, layers[i].layout, {
+            'text-field': '\uf0f4',
+          })
+        }));
       }
     }
-    // store.dispatch(SdkMapActions.updateLayer('cafe', {
-    //   paint: Object.assign({}, layer.paint, {
-    //     'fill-opacity': opacity,
-    //   })
-    // }));
+  }
+  smaller() {
+    // Being Lazing, should design better
+    const state = store.getState();
+    const layers = state.map.layers;
+    for (let i = 0; i < layers.length; i++) {
+      if (layers[i].id === 'coffeePoints') {
+        store.dispatch(SdkMapActions.updateLayer('coffeePoints', {
+          layout: Object.assign({}, layers[i].layout, {
+            'text-size': 18,
+          })
+        }));
+      }
+    }
+  }
+  redder() {
+    // Being Lazing, should design better
+    const state = store.getState();
+    const layers = state.map.layers;
+    for (let i = 0; i < layers.length; i++) {
+      if (layers[i].id === 'coffeePoints') {
+        store.dispatch(SdkMapActions.updateLayer('coffeePoints', {
+          paint: Object.assign({}, layers[i].paint, {
+            'text-color': '#e34a33',
+          })
+        }));
+      }
+    }
   }
   render() {
-    const button = (
-      <button onClick={() => this.coffeeShape()}>Coffee Shop</button>
+    const buttons = (
+      <span>
+        <button onClick={() => this.coffeeShape()}>Coffee Shape</button>
+        <button onClick={() => this.smaller()}>Smaller Size</button>
+        <button onClick={() => this.redder()}>Redder color</button>
+      </span>
     );
     return (
       <div  className="slideContent">
         <header><h3>Coffee Shops Near FOSS 4G</h3></header>
         <content>
           <div className="left skinny">
-            {button}
+            <button onClick={()=>this.setState({show: true})}>show</button>
+            {this.state.show ? buttons : false}
           </div>
           <div className="right fat">
             <map>
