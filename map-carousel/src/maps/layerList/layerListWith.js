@@ -14,6 +14,7 @@ import {types, layerListItemSource, layerListItemTarget, collect, collectDrop} f
 import METRORAILS from '../../data/Metro_rails.json';
 import NEIGHBORHOODS from '../../data/Neighborhoods.json';
 import CYCLE from '../../data/stl_cycleway.json';
+import PARKS from '../../data/stl_parks.json';
 import TAX from '../../data/stl_tax_codes.json';
 
 const store = createStore(combineReducers({'map': SdkMapReducer}));
@@ -199,6 +200,23 @@ export default class MAP extends Component {
         'line-color': '#aa33ee'
       }
     }));
+    store.dispatch(SdkMapActions.addSource('parks', {
+      type: 'geojson',
+      clusterRadius: 50,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'tax-layer',
+      source: 'parks',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#2ca25f',
+        'line-color': '#bdbdbd'
+      }
+    }));
     // store.dispatch(SdkMapActions.addLayer({
     //   id: 'random-points',
     //   source: 'points',
@@ -215,6 +233,7 @@ export default class MAP extends Component {
     this.quickAddPolygon(NEIGHBORHOODS, 'neighbor');
     this.quickAddPolygon(CYCLE, 'cycle');
     this.quickAddPolygon(TAX, 'tax');
+    this.quickAddPolygon(PARKS, 'parks');
 
 
   }
@@ -250,9 +269,13 @@ export default class MAP extends Component {
     }
   }
   render() {
-    const layerList = (<Provider store={store}>
-      <SdkLayerList layerClass={LayerListItem} />
-    </Provider>);
+    const layerList = (
+      <span>
+        <h6>A layer list helps put a context to your data</h6>
+        <Provider store={store}>
+          <SdkLayerList layerClass={LayerListItem} />
+        </Provider>
+      </span>);
     return (
       <div  className="slideContent">
         <header><h3>What is going on here?</h3></header>
