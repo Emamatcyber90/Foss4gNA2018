@@ -126,7 +126,8 @@ export default class MAP extends Component {
     }
   }
   render() {
-    const button = (
+    let show = false;
+    const buttons = (
       <span>
         <button onClick={() => this.coffeeShape()}>Coffee Shape</button>
         <button onClick={() => this.smaller()}>Smaller Size</button>
@@ -138,7 +139,10 @@ export default class MAP extends Component {
         <header><h3>Coffee Shops Near FOSS 4G</h3></header>
         <content>
           <div className="left skinny">
-            {button}
+            <button onClick={()=>{
+              show = true;
+            }}>show</button>
+            {show ? buttons : false}
           </div>
           <div className="right fat">
             <map>
