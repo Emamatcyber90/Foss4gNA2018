@@ -8,6 +8,7 @@ import LayerListWith from './maps/layerList/layerListWith';
 import LayerListWithout from './maps/layerList/layerListWithout';
 import BigIcon from './maps/featureStyle/bigIcons';
 import PolygonSolid from './maps/featureStyle/polygonSolid';
+import Popup from './maps/popup/popup';
 
 import Title from './title.js';
 import Sdk from './sdkSlide.js';
@@ -62,6 +63,15 @@ class App extends Component {
         </div>
       </div>
     );
+    // full = (<div className="App">
+    //   <div className="Map-container">
+    //     <Slider {...settings}>
+    //       <div>
+    //         <Popup/>
+    //       </div>
+    //     </Slider>
+    //   </div>
+    // </div>);
     return full;
   }
 }

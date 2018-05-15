@@ -424,3 +424,6 @@ html, body {
 
 .sdk-map {
   height: 80%; }
+
+.sdk-popup {
+  width: 300px; }
