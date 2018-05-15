@@ -419,3 +419,6 @@ html, body {
       flex: 1;
       padding-top: 30px;
       padding-bottom: 30px; }
+
+.sdk-map {
+  height: 80%; }

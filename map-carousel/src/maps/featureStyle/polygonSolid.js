@@ -4,7 +4,7 @@ import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 import {Provider} from 'react-redux';
-import pageOne from '../../img/page-one.png';
+import pageOne from '../../img/BoundlessLogo2018.png';
 
 import STL_PARKS from '../../data/stl_parks.json';
 import STL_TAX from '../../data/stl_tax_codes.json';
@@ -127,7 +127,7 @@ export default class MAP extends Component {
           </div>
         </content>
         <footer>
-          <img src={pageOne} alt=''></img>
+          <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
         </footer>
       </div>
     );
