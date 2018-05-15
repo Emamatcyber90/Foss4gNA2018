@@ -61,7 +61,7 @@ class App extends Component {
               <BigIcon/>
             </div>
             <div>
-              <PolygonSolid/>
+              <Popup/>
             </div>
           </Slider>
         </div>

@@ -29,7 +29,7 @@ export default class ZoomWithout extends Component {
   render() {
     return (
       <div className="slideContent">
-        <header><h3>Click and Zoom in</h3></header>
+        <header><h3>Simple first map</h3></header>
         <content>
           <div className="left skinny"></div>
           <div className="right fat">
