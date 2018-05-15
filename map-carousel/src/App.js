@@ -12,6 +12,7 @@ import Popup from './maps/popup/popup';
 
 import Title from './title.js';
 import Sdk from './sdkSlide.js';
+import UIUX from './UI-UX.js';
 
 class App extends Component {
 
@@ -40,6 +41,9 @@ class App extends Component {
             </div>
             <div>
               <Sdk/>
+            </div>
+            <div>
+              <UIUX/>
             </div>
             <div>
               <ZoomWithout/>
