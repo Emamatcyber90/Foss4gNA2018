@@ -11,7 +11,6 @@ import SdkLayerListItem from '@boundlessgeo/sdk/components/layer-list-item';
 import {DragSource, DropTarget} from 'react-dnd';
 import {types, layerListItemSource, layerListItemTarget, collect, collectDrop} from '@boundlessgeo/sdk/components/layer-list-item';
 import STATES from '../../data/states.json';
-import pageOne from '../../img/BoundlessLogo2018.png';
 
 const store = createStore(combineReducers({'map': SdkMapReducer}));
 

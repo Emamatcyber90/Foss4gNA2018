@@ -35,7 +35,7 @@ export default class MAP extends Component {
       },
     }));
     store.dispatch(SdkMapActions.addLayer({
-      id: 'random-points',
+      id: 'coffeePoints',
       source: 'cafe',
       type: 'symbol',
       layout: {
@@ -82,7 +82,13 @@ export default class MAP extends Component {
     }
   }
   coffeeShape() {
-    console.log(store.map);
+    // Being Lazing, should design better
+    const map = store.getState();
+    for (let i = 0; i <= map.layers.length; i++) {
+      if (map.layers[i].id === 'coffeePoints') {
+        console.log(map.layers[i].paint);
+      }
+    }
     // store.dispatch(SdkMapActions.updateLayer('cafe', {
     //   paint: Object.assign({}, layer.paint, {
     //     'fill-opacity': opacity,
