@@ -33,7 +33,9 @@ export default class ZoomWith extends Component {
       <div className="slideContent">
         <header><h3>Map with Zoom</h3></header>
         <content>
-          <div className="left skinny"></div>
+          <div className="left skinny">
+            <h3>Now a user regardless of platform can zoom in and out</h3>
+          </div>
           <div className="right fat">
             <map>
               <Provider store={store}>
