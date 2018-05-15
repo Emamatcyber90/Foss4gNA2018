@@ -6,7 +6,7 @@
 // @import "/node_modules/sanitize.css/sanitize.css";
 
 @mixin sdk-button {
-    padding: 8px;
+    padding: 6px 8px;
     margin-right: 6px;
 }
 
@@ -58,6 +58,15 @@ html, body {
         // align-items: center;
         // justify-content: center;
         padding-top: 60px;
+      }
+      .bucket {
+        padding: 10px 0 10px 0;
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        .sdk-btn {
+          margin-bottom: 4px;
+        }
       }
     }
     footer {

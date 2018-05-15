@@ -133,10 +133,10 @@ export default class MAP extends Component {
   }
   render() {
     const buttons = (
-      <span>
-        <button onClick={() => this.coffeeShape()}>Coffee Shape</button>
-        <button onClick={() => this.smaller()}>Smaller Size</button>
-        <button onClick={() => this.redder()}>Redder color</button>
+      <span className="bucket">
+        <button className="sdk-btn" onClick={() => this.coffeeShape()}>Coffee Shape</button>
+        <button className="sdk-btn" onClick={() => this.smaller()}>Smaller Size</button>
+        <button className="sdk-btn" onClick={() => this.redder()}>Redder color</button>
       </span>
     );
     return (
@@ -144,7 +144,7 @@ export default class MAP extends Component {
         <header><h3>Coffee Shops Near FOSS 4G</h3></header>
         <content>
           <div className="left skinny">
-            <button onClick={()=>this.setState({show: true})}>show</button>
+            <button className="sdk-btn" onClick={()=>this.setState({show: true})}>show</button>
             {this.state.show ? buttons : false}
           </div>
           <div className="right fat">
