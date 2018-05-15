@@ -11,7 +11,10 @@ import SdkLayerList from '@boundlessgeo/sdk/components/layer-list';
 import SdkLayerListItem from '@boundlessgeo/sdk/components/layer-list-item';
 import {DragSource, DropTarget} from 'react-dnd';
 import {types, layerListItemSource, layerListItemTarget, collect, collectDrop} from '@boundlessgeo/sdk/components/layer-list-item';
-import STATES from '../../data/states.json';
+import METRORAILS from '../../data/Metro_rails.json';
+import NEIGHBORHOODS from '../../data/Neighborhoods.json';
+import CYCLE from '../../data/stl_cycleway.json';
+import TAX from '../../data/stl_tax_codes.json';
 
 const store = createStore(combineReducers({'map': SdkMapReducer}));
 
@@ -80,6 +83,12 @@ LayerListItem = DropTarget(types, layerListItemTarget, collectDrop)(DragSource(t
 
 
 export default class MAP extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+  }
   componentDidMount() {
     store.dispatch(SdkMapActions.addSource('mblight', {
       type: 'raster',
@@ -95,7 +104,7 @@ export default class MAP extends Component {
       source: 'mblight',
     }));
     // Start with a reasonable global view of hte map.
-    store.dispatch(SdkMapActions.setView([-90, 38], 2));
+    store.dispatch(SdkMapActions.setView([-90.1911121, 38.6251834], 10));
 
     store.dispatch(SdkMapActions.updateMetadata({
       'mapbox:groups': {
@@ -116,15 +125,15 @@ export default class MAP extends Component {
         'bnd:hide-layerlist': true,
       },
     }));
-    store.dispatch(SdkMapActions.addSource('points', {
-      type: 'geojson',
-      clusterRadius: 50,
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    }));
-    store.dispatch(SdkMapActions.addSource('states', {
+    // store.dispatch(SdkMapActions.addSource('points', {
+    //   type: 'geojson',
+    //   clusterRadius: 50,
+    //   data: {
+    //     type: 'FeatureCollection',
+    //     features: [],
+    //   },
+    // }));
+    store.dispatch(SdkMapActions.addSource('metro', {
       type: 'geojson',
       clusterRadius: 50,
       data: {
@@ -133,27 +142,81 @@ export default class MAP extends Component {
       },
     }));
     store.dispatch(SdkMapActions.addLayer({
-      id: 'states-fill',
-      source: 'states',
+      id: 'metro-layer',
+      source: 'metro',
+      type: 'line',
+      'paint': {
+        'line-color': '#3333ee'
+      }
+    }));
+    store.dispatch(SdkMapActions.addSource('neighbor', {
+      type: 'geojson',
+      clusterRadius: 50,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'neighbor-layer',
+      source: 'neighbor',
       type: 'fill',
       'paint': {
         'fill-color': '#eeffee',
         'line-color': '#aa33ee'
       }
     }));
-    store.dispatch(SdkMapActions.addLayer({
-      id: 'random-points',
-      source: 'points',
-      type: 'circle',
-      paint: {
-        'circle-radius': 3,
-        'circle-color': '#756bb1',
-        'circle-stroke-color': '#756bb1',
+    store.dispatch(SdkMapActions.addSource('cycle', {
+      type: 'geojson',
+      clusterRadius: 50,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
       },
-      filter: ['!has', 'point_count'],
     }));
-    this.addRandomPoints(200);
-    this.quickAddPolygon(STATES);
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'cycle-layer',
+      source: 'cycle',
+      type: 'line',
+      'paint': {
+        'line-color': '#aa3311'
+      }
+    }));
+    store.dispatch(SdkMapActions.addSource('tax', {
+      type: 'geojson',
+      clusterRadius: 50,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'tax-layer',
+      source: 'tax',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#eeffee',
+        'line-color': '#aa33ee'
+      }
+    }));
+    // store.dispatch(SdkMapActions.addLayer({
+    //   id: 'random-points',
+    //   source: 'points',
+    //   type: 'circle',
+    //   paint: {
+    //     'circle-radius': 3,
+    //     'circle-color': '#756bb1',
+    //     'circle-stroke-color': '#756bb1',
+    //   },
+    //   filter: ['!has', 'point_count'],
+    // }));
+    // this.addRandomPoints(200);
+    this.quickAddPolygon(METRORAILS, 'metro');
+    this.quickAddPolygon(NEIGHBORHOODS, 'neighbor');
+    this.quickAddPolygon(CYCLE, 'cycle');
+    this.quickAddPolygon(TAX, 'tax');
+
+
   }
 
   // Add a random point to the map
@@ -171,30 +234,33 @@ export default class MAP extends Component {
         geometry: {
           type: 'Point',
           // this generates a point somewhere on the planet, unbounded.
-          coordinates: [(Math.random() * 360) - 180, (Math.random() * 180) - 90],
+          coordinates: [(Math.random() * 90) - 180, (Math.random() * 90) - 90],
         },
       }]));
     }
   }
-  quickAddPolygon(json) {
+  quickAddPolygon(json, name) {
     for (let i = 0; i < json.features.length; i++) {
       const feature = json.features[i];
-      store.dispatch(SdkMapActions.addFeatures('states', [{
+      store.dispatch(SdkMapActions.addFeatures(name, [{
         type: 'Feature',
-        properties: {name: feature.properties.name},
+        properties: feature.properties,
         geometry: feature.geometry,
       }]));
     }
   }
   render() {
+    const layerList = (<Provider store={store}>
+      <SdkLayerList layerClass={LayerListItem} />
+    </Provider>);
     return (
       <div  className="slideContent">
-        <header><h3>Look a layer, now we have an idea</h3></header>
+        <header><h3>What is going on here?</h3></header>
         <content>
           <div className="left skinny">
-            <Provider store={store}>
-              <SdkLayerList layerClass={LayerListItem} />
-            </Provider>
+            <h6>A good answer gets swag.</h6>
+            <button className="sdk-btn" onClick={()=>this.setState({show: true})}>show</button>
+            {this.state.show ? layerList : false}
           </div>
           <div className="right fat">
             <map>

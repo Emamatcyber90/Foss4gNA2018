@@ -51,9 +51,6 @@ class App extends Component {
               <ZoomWith/>
             </div>
             <div>
-              <LayerListWithout/>
-            </div>
-            <div>
               <LayerListWith/>
             </div>
             <div>
