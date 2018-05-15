@@ -46,7 +46,7 @@ export default class ZoomWithout extends Component {
           </div>
         </content>
         <footer>
-          FOOTER HERE
+        <img src={pageOne} alt='Boundless Geospacial' height="34"></img>
         </footer>
       </div>
     );

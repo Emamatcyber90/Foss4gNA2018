@@ -118,9 +118,9 @@ export default class MAP extends Component {
     return (
       <div  className="slideContent">
         <content>
-          <div className="left skinny">St. Louis Park and Tax districts</div>
+          <div className="left skinny"></div>
           <div className="right fat">
-            <h3>title</h3>
+            <h3>St. Louis Park and Tax districts</h3>
             <map>
               <Provider store={store}>
                 <SdkMap store={store} />
