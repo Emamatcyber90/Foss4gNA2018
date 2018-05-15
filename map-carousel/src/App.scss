@@ -54,11 +54,23 @@ html, body {
     background: url(img/page-one.png) no-repeat center center;
     background-size: cover;
     color: #fff;
-    // height: 100vh;
     h1{
       margin: 0;
-      padding-top: 300px;
+      padding-top: 260px;
       font-size: 60px;
+    }
+    p {
+      text-align: center;
+      margin: 0;
+    }
+    .names {
+      display: flex;
+      align-items: stretch;
+      span {
+        flex: 1;
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
     }
 
   }
