@@ -192,13 +192,15 @@ export default class MAP extends Component {
   render() {
     return (
       <div  className="slideContent">
+        <header>
+          <h3>St. Louis Park and Tax districts</h3>
+        </header>
         <content>
           <div className="left skinny">
             <button onClick={() => this.setState({show: true})}>show</button>
             {this.state.show ? <ul>{this.buildAttrListFromState()}</ul> : false}
           </div>
           <div className="right fat">
-            <h3>St. Louis Park and Tax districts</h3>
             <map>
               <Provider store={store}>
                 <SdkMap
