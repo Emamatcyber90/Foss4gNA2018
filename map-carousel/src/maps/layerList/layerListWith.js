@@ -209,7 +209,7 @@ export default class MAP extends Component {
       },
     }));
     store.dispatch(SdkMapActions.addLayer({
-      id: 'tax-layer',
+      id: 'parks-layer',
       source: 'parks',
       type: 'fill',
       'paint': {

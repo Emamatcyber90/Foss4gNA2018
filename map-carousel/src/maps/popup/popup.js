@@ -61,9 +61,11 @@ class MarkFeaturesPopup extends SdkPopup {
         </code>
         <br />
         <p>
-          <ul className='popup-list'>
-            {this.buildAttrList(this.props.features[0])}
-          </ul>
+          <div>
+            <ul className='popup-list'>
+              {this.buildAttrList(this.props.features[0])}
+            </ul>
+          </div>
         </p>
       </div>
     ));
@@ -74,7 +76,8 @@ export default class MAP extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false
+      show: false,
+      clickLocation: ''
     };
   }
   componentDidMount() {
@@ -186,7 +189,22 @@ export default class MAP extends Component {
         const key = keys[i];
         li.push(<li key={key}>{key}: {feature.properties[key]}</li>);
       }
-      return li;
+      return (
+        <div className="sdk-popup-content">
+          You clicked here:<br />
+          <code>
+            { this.state.clickLocation }
+          </code>
+          <br />
+          <p>
+            <div>
+              <ul className='popup-list'>
+                {li}
+              </ul>
+            </div>
+          </p>
+        </div>
+      );
     }
     return false;
   }
@@ -226,7 +244,7 @@ export default class MAP extends Component {
                         map.addPopup(<SdkPopup coordinate={xy} closeable><i>No features found.</i></SdkPopup>);
                       } else {
                         if (this.state.show) {
-                          this.setState({feature: features[0]});
+                          this.setState({feature: features[0], clickLocation: xy.hms});
                         } else {
                         // Show the super advanced fun popup!
                           map.addPopup(<MarkFeaturesPopup coordinate={xy} features={features} closeable />);
