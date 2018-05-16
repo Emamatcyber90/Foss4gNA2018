@@ -166,16 +166,17 @@ export default class MAP extends Component {
         'bnd:hide-layerlist': true,
       },
     }));
-    this.quickAddPoint(STL_PARKS, 'park');
+    this.quickAddPoint(STL_PARKS, 'park', true);
     this.quickAddPoint(STL_TAX, 'tax');
     this.quickAddPoint(STL_NEIGHBOR, 'neighborhood');
   }
-  quickAddPoint(json, sourceName) {
+  quickAddPoint(json, sourceName, nameOnly = false) {
     for (let i = 0; i < json.features.length; i++) {
       const feature = json.features[i];
+      const properties =  nameOnly ? {name: feature.properties.name} : feature.properties;
       store.dispatch(SdkMapActions.addFeatures(sourceName, [{
         type: 'Feature',
-        properties: feature.properties,
+        properties: properties,
         geometry: feature.geometry,
       }]));
     }
@@ -260,7 +261,6 @@ export default class MAP extends Component {
               </Provider>
             </map>
             <div className="caption">
-              
             </div>
           </div>
         </content>

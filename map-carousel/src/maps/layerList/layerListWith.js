@@ -17,7 +17,9 @@ import CYCLE from '../../data/stl_cycleway.json';
 import PARKS from '../../data/stl_parks.json';
 import TAX from '../../data/stl_tax_codes.json';
 
-const store = createStore(combineReducers({'map': SdkMapReducer}));
+const store = createStore(combineReducers({
+  'map': SdkMapReducer,
+}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 class LayerListItem extends SdkLayerListItem {
   changeOpacity() {
@@ -99,7 +101,6 @@ export default class MAP extends Component {
       ]
     }));
 
-    // add an OSM layer
     store.dispatch(SdkMapActions.addLayer({
       id: 'Basemap',
       source: 'mblight',
@@ -134,6 +135,7 @@ export default class MAP extends Component {
     //     features: [],
     //   },
     // }));
+
     store.dispatch(SdkMapActions.addSource('metro', {
       type: 'geojson',
       clusterRadius: 50,
@@ -163,8 +165,8 @@ export default class MAP extends Component {
       source: 'neighbor',
       type: 'fill',
       'paint': {
-        'fill-color': '#eeffee',
-        'line-color': '#aa33ee'
+        'fill-color': '#9ecae1',
+        'line-color': '#3182bd'
       }
     }));
     store.dispatch(SdkMapActions.addSource('cycle', {
@@ -196,8 +198,8 @@ export default class MAP extends Component {
       source: 'tax',
       type: 'fill',
       'paint': {
-        'fill-color': '#eeffee',
-        'line-color': '#aa33ee'
+        'fill-color': '#9ecae1',
+        'line-color': '#3182bd'
       }
     }));
     store.dispatch(SdkMapActions.addSource('parks', {
@@ -217,25 +219,12 @@ export default class MAP extends Component {
         'line-color': '#bdbdbd'
       }
     }));
-    // store.dispatch(SdkMapActions.addLayer({
-    //   id: 'random-points',
-    //   source: 'points',
-    //   type: 'circle',
-    //   paint: {
-    //     'circle-radius': 3,
-    //     'circle-color': '#756bb1',
-    //     'circle-stroke-color': '#756bb1',
-    //   },
-    //   filter: ['!has', 'point_count'],
-    // }));
-    // this.addRandomPoints(200);
-    this.quickAddPolygon(METRORAILS, 'metro');
-    this.quickAddPolygon(NEIGHBORHOODS, 'neighbor');
-    this.quickAddPolygon(CYCLE, 'cycle');
-    this.quickAddPolygon(TAX, 'tax');
-    this.quickAddPolygon(PARKS, 'parks');
 
-
+    this.quickAddLayer(METRORAILS, 'metro');
+    this.quickAddLayer(NEIGHBORHOODS, 'neighbor');
+    this.quickAddLayer(CYCLE, 'cycle', true);
+    this.quickAddLayer(TAX, 'tax');
+    this.quickAddLayer(PARKS, 'parks', true);
   }
 
   // Add a random point to the map
@@ -258,12 +247,13 @@ export default class MAP extends Component {
       }]));
     }
   }
-  quickAddPolygon(json, name) {
+  quickAddLayer(json, sourceName, nameOnly = false) {
     for (let i = 0; i < json.features.length; i++) {
       const feature = json.features[i];
-      store.dispatch(SdkMapActions.addFeatures(name, [{
+      const properties =  nameOnly ? {name: feature.properties.name} : feature.properties;
+      store.dispatch(SdkMapActions.addFeatures(sourceName, [{
         type: 'Feature',
-        properties: feature.properties,
+        properties: properties,
         geometry: feature.geometry,
       }]));
     }

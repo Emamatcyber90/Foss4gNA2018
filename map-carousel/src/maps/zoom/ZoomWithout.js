@@ -50,7 +50,6 @@ export default class ZoomWithout extends Component {
               </Provider>
             </map>
             <div className="caption">
-
             </div>
           </div>
         </content>
