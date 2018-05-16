@@ -17,7 +17,7 @@ export default class ZoomWithout extends Component {
     };
   }
   componentDidMount() {
-    store.dispatch(SdkMapActions.setView([-90, 38], 7));
+    store.dispatch(SdkMapActions.setView([-90.1911121, 38.6251834], 10));
     store.dispatch(SdkMapActions.addSource('mblight', {
       type: 'raster',
       tileSize: 256,
