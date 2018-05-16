@@ -11,7 +11,7 @@ If you get errors about node-gpy check the steps here
 https://github.com/boundlessgeo/sdk/blob/master/DEVELOPING.md
 
 
-### Script
+### Basic Script 
 INTRO
 Hi We are Willie Nordmann and Jeremy Mulenex.  
 We work at Boundless here in st. Louis.  
