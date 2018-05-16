@@ -4,7 +4,7 @@ export default class title extends Component {
   render() {
     return (
       <div className="landing slideContent">
-        <h1>What is user interaction</h1>
+        <h1>What is UI/UX?</h1>
         <div className="names">
           <span className="first">
             <h3>UI</h3>
