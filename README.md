@@ -3,9 +3,12 @@
 ### What makes a map terrible?
 
 ## Build
-`npm install`
-`npm watch-css`
-`npm start`
+* `npm install`
+* `npm watch-css`
+* `npm start`
+
+If you get errors about node-gpy check the steps here
+https://github.com/boundlessgeo/sdk/blob/master/DEVELOPING.md
 
 
 ### Script
