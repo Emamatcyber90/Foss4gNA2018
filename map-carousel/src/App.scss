@@ -2,12 +2,10 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 @import "basic";
-@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css";
-// @import "/node_modules/sanitize.css/sanitize.css";
-
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"; // @import "/node_modules/sanitize.css/sanitize.css";
 @mixin sdk-button {
-    padding: 6px 8px;
-    margin-right: 6px;
+  padding: 6px 8px;
+  margin-right: 6px;
 }
 @mixin clearfix {
   &:after {
@@ -17,8 +15,8 @@
   }
 }
 
-
-html, body {
+body,
+html {
   height: 100%;
 }
 
@@ -26,123 +24,142 @@ html, body {
   text-align: center;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .Map-container {
   .slideContent {
-    padding: 0px 60px 0px 60px;
+    padding: 0 60px;
     height: calc(100vh - 20px);
     display: flex;
     flex-direction: column;
+
     header {
       text-align: left;
       padding-top: 60px;
       padding-bottom: 20px;
     }
+
     content {
       text-align: left;
       display: flex;
       flex: 1 0 auto;
+
       .left {
         flex: 2;
         padding-right: 20px;
+
         h6 {
           margin-top: 0;
         }
+
+        .sdk-popup-content {
+          border: 1px solid #ccc;
+          padding: 0 20px;
+          border-radius: 10px;
+          margin-top: 20px;
+          box-shadow: 4px 4px 10px #cdcdcd;
+        }
       }
+
       .right {
         flex: 5;
       }
+
       &.sdk {
         padding-top: 60px;
       }
+
       .bucket {
-        padding: 10px 0 10px 0;
+        padding: 10px 0;
         display: flex;
         flex-direction: column;
         width: auto;
+
         .sdk-btn {
           margin-bottom: 4px;
           width: 40%;
         }
       }
     }
+
     footer {
       flex-shrink: 0;
       height: 70px;
     }
   }
+
   .landing {
-    background: url(img/page-one.png) no-repeat center center;
+    background: url("img/page-one.png") no-repeat center center;
     background-size: cover;
     color: #fff;
     align-items: center;
-    h1{
+
+    h1 {
       margin: 0;
       padding-top: 220px;
       padding-bottom: 60px;
       font-size: 60px;
     }
+
     p {
       text-align: center;
       margin: 0;
     }
+
     .names {
       width: 60%;
       display: flex;
       align-items: stretch;
+
       span {
         flex: 1;
         padding-top: 30px;
         padding-bottom: 30px;
       }
     }
-
   }
-
 }
+
 .sdk-map {
   height: 80%;
 }
-.sdk-layer-list {
-    padding: 0;
-    li {
-      display: block;
-    }
-    .layer {
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      // border: 1px dashed #333;
-      .checkbox {
 
-        input {
-          width: 32px;
-          height: 32px;
-        }
-      }
-      .name {
-        margin-right: 10px;
-      }
-      .btn-container {
-        flex: 1;
-        text-align: right;
-        .sdk-btn {
-          @include sdk-button;
-        }
+.sdk-layer-list {
+  padding: 0;
+
+  li {
+    display: block;
+  }
+
+  .layer {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    // border: 1px dashed #333;
+    .checkbox {
+      input {
+        width: 32px;
+        height: 32px;
       }
     }
+
+    .name {
+      margin-right: 10px;
+    }
+
+    .btn-container {
+      flex: 1;
+      text-align: right;
+
+      .sdk-btn {
+        @include sdk-button;
+      }
+    }
+  }
 }
+
 .sdk-popup {
   width: 300px;
 }
+
 .sdk-btn {
   @include sdk-button;
 }

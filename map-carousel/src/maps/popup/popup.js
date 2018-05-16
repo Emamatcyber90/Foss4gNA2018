@@ -191,11 +191,12 @@ export default class MAP extends Component {
       }
       return (
         <div className="sdk-popup-content">
-          You clicked here:<br />
-          <code>
-            { this.state.clickLocation }
-          </code>
-          <br />
+          <p>
+            You clicked here:<br />
+            <code>
+              { this.state.clickLocation }
+            </code>
+          </p>
           <p>
             <div>
               <ul className='popup-list'>
@@ -217,7 +218,7 @@ export default class MAP extends Component {
         <content>
           <div className="left skinny">
             <button className="sdk-btn" onClick={() => this.setState({show: true})}>show</button>
-            {this.state.show ? <ul>{this.buildAttrListFromState()}</ul> : false}
+            {this.state.show ? <span>{this.buildAttrListFromState()}</span> : false}
           </div>
           <div className="right fat">
             <map>
@@ -260,7 +261,7 @@ export default class MAP extends Component {
               </Provider>
             </map>
             <div className="caption">
-              
+
             </div>
           </div>
         </content>
