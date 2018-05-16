@@ -19,30 +19,6 @@ const store = createStore(combineReducers({
  *  are selected.
  */
 class MarkFeaturesPopup extends SdkPopup {
-
-  constructor(props) {
-    super(props);
-    this.markFeatures = this.markFeatures.bind(this);
-  }
-
-  markFeatures(evt) {
-    const feature_ids = [];
-    const features = this.props.features;
-
-    for (let i = 0, ii = features.length; i < ii; i++) {
-      // create an array of ids to be removed from the map.
-      feature_ids.push(features[i].properties.id);
-      // set the feature property to "marked".
-      features[i].properties.isMarked = true;
-    }
-
-    // remove the old unmarked features
-    store.dispatch(SdkMapActions.removeFeatures('points', ['in', 'id'].concat(feature_ids)));
-    // add the new freshly marked features.
-    store.dispatch(SdkMapActions.addFeatures('points', features));
-    // close this popup.
-    this.close(evt);
-  }
   buildAttrList(feature) {
     const li = [];
     const keys = Object.keys(feature.properties);
@@ -60,13 +36,11 @@ class MarkFeaturesPopup extends SdkPopup {
           { this.props.coordinate.hms }
         </code>
         <br />
-        <p>
-          <div>
-            <ul className='popup-list'>
-              {this.buildAttrList(this.props.features[0])}
-            </ul>
-          </div>
-        </p>
+        <span>
+          <ul className='popup-list'>
+            {this.buildAttrList(this.props.features[0])}
+          </ul>
+        </span>
       </div>
     ));
   }
@@ -77,7 +51,9 @@ export default class MAP extends Component {
     super(props);
     this.state = {
       show: false,
-      clickLocation: ''
+      clickLocation: '',
+      featureId: '',
+      oldFeature: {},
     };
   }
   componentDidMount() {
@@ -127,7 +103,18 @@ export default class MAP extends Component {
       'paint': {
         'fill-color': '#2ca25f',
         'line-color': '#000000'
-      }
+      },
+      filter: ['!=', 'isMarked', true],
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'taxMarked',
+      source: 'tax',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#99a25f',
+        'line-color': '#005500'
+      },
+      filter: ['==', 'isMarked', true],
     }));
     store.dispatch(SdkMapActions.addSource('neighborhood', {
       type: 'geojson',
@@ -138,13 +125,24 @@ export default class MAP extends Component {
       },
     }));
     store.dispatch(SdkMapActions.addLayer({
-      id: 'neighborhood area',
+      id: 'neighborhoodarea',
       source: 'neighborhood',
       type: 'fill',
       'paint': {
         'fill-color': '#2ca25f',
         'line-color': '#000000'
-      }
+      },
+      filter: ['!=', 'isMarked', true],
+    }));
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'neighborhoodMarked',
+      source: 'tax',
+      type: 'fill',
+      'paint': {
+        'fill-color': '#99a25f',
+        'line-color': '#005500'
+      },
+      filter: ['==', 'isMarked', true],
     }));
 
     store.dispatch(SdkMapActions.updateMetadata({
@@ -176,14 +174,40 @@ export default class MAP extends Component {
       const properties =  nameOnly ? {name: feature.properties.name} : feature.properties;
       store.dispatch(SdkMapActions.addFeatures(sourceName, [{
         type: 'Feature',
-        properties: properties,
+        properties: Object.assign({}, properties, {id: `${sourceName}${i}`, isMarked: false, sourceName: sourceName}),
         geometry: feature.geometry,
       }]));
     }
   }
+  markFeatures() {
+    const features = [];
+    const feature = this.state.feature;
+    const sourceName = feature.properties.sourceName;
+
+    const feature_ids = [];
+    let oldFeature = {};
+    if (this.state.oldFeature !== undefined) {
+      oldFeature = this.state.oldFeature;
+      oldFeature.properties.isMarked = false;
+      features.push(oldFeature);
+      feature_ids.push(this.state.oldFeature.properties.id);
+    }
+    // this.setState({featureId: feature.properties.id});
+    // create an array of ids to be removed from the map.
+    feature_ids.push(feature.properties.id);
+    // set the feature property to "marked".
+    feature.properties.isMarked = true;
+
+    features.push(feature);
+    // remove the old unmarked features
+    store.dispatch(SdkMapActions.removeFeatures(sourceName, ['in', 'id'].concat(feature_ids)));
+    // add the new freshly marked features.
+    store.dispatch(SdkMapActions.addFeatures(sourceName, features));
+  }
   buildAttrListFromState() {
     const feature = this.state.feature;
     if (feature !== undefined) {
+      this.markFeatures();
       const li = [];
       const keys = Object.keys(feature.properties);
       for (let i = 0; i < keys.length; i++) {
@@ -198,13 +222,11 @@ export default class MAP extends Component {
               { this.state.clickLocation }
             </code>
           </p>
-          <p>
-            <div>
-              <ul className='popup-list'>
-                {li}
-              </ul>
-            </div>
-          </p>
+          <span>
+            <ul className='popup-list'>
+              {li}
+            </ul>
+          </span>
         </div>
       );
     }
@@ -218,8 +240,8 @@ export default class MAP extends Component {
         </header>
         <content>
           <div className="left skinny">
-            <button className="sdk-btn" onClick={() => this.setState({show: true})}>show</button>
-            {this.state.show ? <span>{this.buildAttrListFromState()}</span> : false}
+            {this.state.show ? <span>{this.buildAttrListFromState()}</span>
+              : <button className="sdk-btn" onClick={() => this.setState({show: true})}>show</button>}
           </div>
           <div className="right fat">
             <map>
@@ -245,8 +267,12 @@ export default class MAP extends Component {
                       // no features, :( Let the user know nothing was there.
                         map.addPopup(<SdkPopup coordinate={xy} closeable><i>No features found.</i></SdkPopup>);
                       } else {
+                        const old = this.state.feature;
                         if (this.state.show) {
-                          this.setState({feature: features[0], clickLocation: xy.hms});
+                          this.setState({feature: features[0],
+                            oldFeature: old,
+                            clickLocation: xy.hms,
+                          });
                         } else {
                         // Show the super advanced fun popup!
                           map.addPopup(<MarkFeaturesPopup coordinate={xy} features={features} closeable />);
@@ -262,7 +288,6 @@ export default class MAP extends Component {
               </Provider>
             </map>
             <div className="caption">
-              
             </div>
           </div>
         </content>
