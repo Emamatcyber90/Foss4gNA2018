@@ -284,7 +284,6 @@ export default class MAP extends Component {
               </Provider>
             </map>
             <div className="caption">
-              caption here
             </div>
           </div>
         </content>

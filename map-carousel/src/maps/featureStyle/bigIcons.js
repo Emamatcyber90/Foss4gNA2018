@@ -34,7 +34,7 @@ export default class MAP extends Component {
       source: 'mblight',
     }));
     // Start with a reasonable global view of hte map.
-    store.dispatch(SdkMapActions.setView([-90.1911121, 38.6251834], 10));
+    store.dispatch(SdkMapActions.setView([-90.1911121, 38.6251834], 13));
     store.dispatch(SdkMapActions.addSource('cafe', {
       type: 'geojson',
       clusterRadius: 50,
@@ -157,7 +157,7 @@ export default class MAP extends Component {
               </Provider>
             </map>
             <div className="caption">
-              caption here
+              Lets find a coffee shop
             </div>
           </div>
         </content>
