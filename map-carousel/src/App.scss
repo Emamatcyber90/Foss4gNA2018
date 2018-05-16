@@ -47,29 +47,20 @@ html, body {
       padding-bottom: 20px;
     }
     content {
-      // background-color: lightgrey;
       text-align: left;
       display: flex;
       flex: 1 0 auto;
       .left {
-        // background-color: green;
         flex: 2;
         padding-right: 20px;
-        .pull-right {
-
-          // @include clearfix;
-        }
         h6 {
           margin-top: 0;
         }
       }
       .right {
-        // background-color: blue;
         flex: 5;
       }
       &.sdk {
-        // align-items: center;
-        // justify-content: center;
         padding-top: 60px;
       }
       .bucket {
@@ -79,11 +70,11 @@ html, body {
         width: auto;
         .sdk-btn {
           margin-bottom: 4px;
+          width: 40%;
         }
       }
     }
     footer {
-      // background-color: red;
       flex-shrink: 0;
       height: 70px;
     }
@@ -96,6 +87,7 @@ html, body {
     h1{
       margin: 0;
       padding-top: 260px;
+      padding-bottom: 60px;
       font-size: 60px;
     }
     p {
