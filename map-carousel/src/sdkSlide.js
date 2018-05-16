@@ -14,6 +14,7 @@ export default class title extends Component {
         </div>
         <div className="right fat">
           <div>
+          <p>Features</p>
             <ul>
               <li>
                 Redux and React-Redux now manage the application state.
@@ -37,6 +38,11 @@ export default class title extends Component {
                 New examples showcasing common use cases available on github
               </li>
             </ul>
+            <p>
+            Try it out:</p>
+            <code>
+            <i className="fa fa-github"></i> https://github.com/boundlessgeo/sdk
+            </code>
           </div>
         </div>
       </content>
