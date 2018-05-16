@@ -38,7 +38,11 @@ export default class title extends Component {
                 New examples showcasing common use cases available on github
               </li>
             </ul>
-            <p><i className="fa fa-github"></i> https://github.com/boundlessgeo/sdk</p>
+            <p>
+            Try it out:</p>
+            <code>
+            <i className="fa fa-github"></i> https://github.com/boundlessgeo/sdk
+            </code>
           </div>
         </div>
       </content>
