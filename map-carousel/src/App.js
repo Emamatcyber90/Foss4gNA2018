@@ -5,7 +5,6 @@ import Slider from 'react-slick';
 import ZoomWithout from './maps/zoom/ZoomWithout';
 import ZoomWith from './maps/zoom/ZoomWith';
 import LayerListWith from './maps/layerList/layerListWith';
-import LayerListWithout from './maps/layerList/layerListWithout';
 import BigIcon from './maps/featureStyle/bigIcons';
 import Popup from './maps/popup/popup';
 
@@ -63,11 +62,11 @@ class App extends Component {
         </div>
       </div>
     );
-    // full = (<div className="App">
+    // const full = (<div className="App">
     //   <div className="Map-container">
     //     <Slider {...settings}>
     //       <div>
-    //         <Popup/>
+    //         <LayerListWith/>
     //       </div>
     //     </Slider>
     //   </div>
