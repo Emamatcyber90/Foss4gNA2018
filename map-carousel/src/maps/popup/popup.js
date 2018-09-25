@@ -8,9 +8,9 @@ import pageOne from '../../img/BoundlessLogo2018.png';
 import SdkPopup from '@boundlessgeo/sdk/components/map/popup';
 import SdkZoomControl from '@boundlessgeo/sdk/components/map/zoom-control';
 
-import STL_PARKS from '../../data/stl_parks.json';
+// import STL_PARKS from '../../data/stl_parks.json';
 import STL_TAX from '../../data/stl_tax_codes.json';
-import STL_NEIGHBOR from '../../data/Neighborhoods.json';
+// import STL_NEIGHBOR from '../../data/Neighborhoods.json';
 const store = createStore(combineReducers({
   'map': SdkMapReducer,
 }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -116,34 +116,34 @@ export default class MAP extends Component {
       },
       filter: ['==', 'isMarked', true],
     }));
-    store.dispatch(SdkMapActions.addSource('neighborhood', {
-      type: 'geojson',
-      clusterRadius: 50,
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    }));
-    store.dispatch(SdkMapActions.addLayer({
-      id: 'neighborhoodarea',
-      source: 'neighborhood',
-      type: 'fill',
-      'paint': {
-        'fill-color': '#2ca25f',
-        'line-color': '#000000'
-      },
-      filter: ['!=', 'isMarked', true],
-    }));
-    store.dispatch(SdkMapActions.addLayer({
-      id: 'neighborhoodMarked',
-      source: 'tax',
-      type: 'fill',
-      'paint': {
-        'fill-color': '#99a25f',
-        'line-color': '#005500'
-      },
-      filter: ['==', 'isMarked', true],
-    }));
+    // store.dispatch(SdkMapActions.addSource('neighborhood', {
+    //   type: 'geojson',
+    //   clusterRadius: 50,
+    //   data: {
+    //     type: 'FeatureCollection',
+    //     features: [],
+    //   },
+    // }));
+    // store.dispatch(SdkMapActions.addLayer({
+    //   id: 'neighborhoodarea',
+    //   source: 'neighborhood',
+    //   type: 'fill',
+    //   'paint': {
+    //     'fill-color': '#2ca25f',
+    //     'line-color': '#000000'
+    //   },
+    //   filter: ['!=', 'isMarked', true],
+    // }));
+    // store.dispatch(SdkMapActions.addLayer({
+    //   id: 'neighborhoodMarked',
+    //   source: 'neighborhood',
+    //   type: 'fill',
+    //   'paint': {
+    //     'fill-color': '#99a25f',
+    //     'line-color': '#005500'
+    //   },
+    //   filter: ['==', 'isMarked', true],
+    // }));
 
     store.dispatch(SdkMapActions.updateMetadata({
       'mapbox:groups': {
@@ -164,9 +164,9 @@ export default class MAP extends Component {
         'bnd:hide-layerlist': true,
       },
     }));
-    this.quickAddPoint(STL_PARKS, 'park', true);
+    // this.quickAddPoint(STL_PARKS, 'park', true);
     this.quickAddPoint(STL_TAX, 'tax');
-    this.quickAddPoint(STL_NEIGHBOR, 'neighborhood');
+    // this.quickAddPoint(STL_NEIGHBOR, 'neighborhood');
   }
   quickAddPoint(json, sourceName, nameOnly = false) {
     for (let i = 0; i < json.features.length; i++) {
@@ -174,7 +174,7 @@ export default class MAP extends Component {
       const properties =  nameOnly ? {name: feature.properties.name} : feature.properties;
       store.dispatch(SdkMapActions.addFeatures(sourceName, [{
         type: 'Feature',
-        properties: Object.assign({}, properties, {id: `${sourceName}${i}`, isMarked: false, sourceName: sourceName}),
+        properties: Object.assign({}, properties, {id: `${sourceName}${i}`, isMarked: false}),
         geometry: feature.geometry,
       }]));
     }
@@ -182,7 +182,7 @@ export default class MAP extends Component {
   markFeatures() {
     const features = [];
     const feature = this.state.feature;
-    const sourceName = feature.properties.sourceName;
+    const sourceName = 'neighborhoodMarked';
 
     const feature_ids = [];
     let oldFeature = {};
