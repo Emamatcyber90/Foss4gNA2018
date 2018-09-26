@@ -13,3 +13,5 @@ ok to install it manually you unzip the plugin into the {user_home_folder}/.qgis
 
 if there is no plugins folder (which means no external plugin was ever installed) he needs to create one
 
+
+geoaxis to add `com.boundlessgeo.anywhere://exchange` as a redirect uri
